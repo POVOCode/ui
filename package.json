@@ -78,6 +78,10 @@
     "html": {
       "title": "POVO",
       "minify": false,
+      "links": [
+        "https://unpkg.com/@blueprintjs/core@^1.15.0/dist/blueprint.css"
+      ],
+
       "scripts": [
         "https://unpkg.com/classnames@^2.2",
         "https://unpkg.com/tether@^1.4"

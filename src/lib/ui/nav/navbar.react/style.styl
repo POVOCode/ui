@@ -1,0 +1,60 @@
+@require ("../../../style/colors.styl")
+
+$nav_height = 64px - 1px // border
+
+#pv-navbar
+  width 100%
+  height $nav_height
+
+  border-bottom 1px solid #c9f2ff
+  background #fff
+
+  > *:first-child
+    padding-left 44px
+
+  > *:last-child
+    padding-right 44px
+
+  &, > ul
+    display flex
+    flex-direction row
+  
+  ul
+    list-style none
+
+    li
+      line-height $nav_height
+      height $nav_height
+
+      font-weight bold
+      font-size 16px
+
+      margin 0 27px
+
+      &:last-child
+        margin-right 0
+
+      &:first-child
+        margin-left 0
+      
+      .bordered
+        border 1px solid $pv_primary_color
+        border-radius 18px
+
+        padding 0 38px
+        text-align center
+
+        height 36px
+        line-height 36px
+
+        display inline-block
+        vertical-align middle
+
+#fake-logo
+  height $nav_height
+  line-height $nav_height
+
+  flex 1
+
+  font-size 24px
+  font-weight bold

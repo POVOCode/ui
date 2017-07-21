@@ -4,7 +4,9 @@ import Immutable from "immutable";
 
 import Bus from "./lib/bus/bus";
 import Routable from "./lib/routable.react";
-import NavBar from "./lib/ui/navbar.react";
+import NavBar from "./lib/ui/nav/navbar.react";
+import ModalToaster from "./lib/ui/notifications/modal_toaster.react";
+import BottomBar from "./lib/ui/nav/bottombar.react";
 
 import HomeView from "./lib/ui/public/home.react";
 import UserProfileView from "./lib/ui/user/profile.react";
@@ -145,9 +147,46 @@ class POVO extends Routable {
         <NavBar
           navigate={this.navigate}
           currentLocation={loc}
+          links={[{
+            bordered: true,
+            label: "Create Poll",
+            href: "#",
+          }, {
+            label: "Login",
+            href: "#",
+          }, {
+            label: "Sign up",
+            href: "#",
+          }]}
+
+        />
+
+        <ModalToaster
+          toast={Immutable.Map({
+            message: "Get 40 points when you sign up",
+            onClick: (() => {}), // To get the icon
+          })}
         />
 
         {viewHTML}
+
+        <BottomBar
+          navigate={this.navigate}
+          currentLocation={loc}
+          links={[{
+            label: "About",
+            href: "#",
+          }, {
+            label: "FAQ",
+            href: "#",
+          }, {
+            label: "Contact",
+            href: "#",
+          }, {
+            label: "Partner",
+            href: "#",
+          }]}
+        />
       </div>
     );
   }

@@ -1,0 +1,132 @@
+@import "../../../style/colors.styl";
+
+.pv-poll-card
+  display flex
+  flex-direction column
+  border-radius 8px
+  overflow hidden
+
+  box-shadow 0 1px 0px 1px rgba(0, 0, 0, 0.1)
+
+  .pv-pc-reward-images
+    display flex
+    flex-direction row
+    list-style-type none
+    flex-wrap wrap
+
+    li
+      background-repeat no-repeat
+      background-size cover
+      background-position center
+
+    &.single li
+      width 100%
+      height 160px
+    
+    &.quarters li
+      height 80px
+      width 50%
+    
+    &.halves li
+      height 160px
+      width 50%
+    
+    &.thirds
+      max-height 162px
+      flex-direction column
+
+      li
+        width 50%
+        height 80px
+
+        &:nth-child(3)
+          height 160px
+          float right
+
+  &.large .pv-pc-reward-images
+    &.single li
+      height 300px
+    
+    &.quarters li
+      height 143px
+    
+    &.halves li
+      height 285px
+
+  h3, h5
+    padding 17px 19px 0 19px
+    color $pv_dark_blue  
+    font-weight normal
+    margin-bottom 10px
+    line-height 1.3
+  
+  &.large h3, &.large h5
+    padding 34px 47px 0 47px
+  
+  h3
+    font-size 28px
+  
+  h5
+    font-size 16px
+
+    width 100%
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+
+.pv-pc-lower-wrapper
+  padding 0 19px 17px 19px
+  display flex
+  flex-direction row
+
+  .pv-pclwi-teaser
+    color #000
+    font-size 16px
+    line-height 1.4
+
+    width 100%
+    overflow hidden
+    text-overflow ellipsis
+
+    max-height calc(16px * 1.3 * 2)
+    max-width 100%
+
+  > h3
+    width 100%
+
+  > h3 + div
+    width 60%
+  
+  > h5 + div
+    width 100%
+
+  button
+    margin 0 auto
+    padding 13px 67px
+    text-align center
+    color #fff
+    background $pv_primary_color
+    border none
+    border-radius 20px
+    font-weight bold
+    font-size 15px
+
+.large .pv-pc-lower-wrapper
+  padding 0 47px 34px 47px
+
+  .pv-pclwi-teaser
+    width 80%
+    margin-bottom 23px
+
+  > div:last-child
+    width 40%
+
+    text-align center
+
+    display flex
+    flex-direction column
+    justify-content center
+
+.pv-pclwi-byline
+  font-size 15px
+  color #989c9d

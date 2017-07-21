@@ -22,4 +22,4 @@ const PollActions = (bus) => {
 
 };
 
-export default CampaignActions;
+export default PollActions;
