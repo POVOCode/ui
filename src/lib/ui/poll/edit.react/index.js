@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import Immutable from "immutable";
 
+import SidebarView from "../../sidebar_view.react";
+import SidebarWrapper from "../../sidebar_wrapper.react";
+import SidebarContentWrapper from "../../sidebar_content_wrapper.react";
+
 import Dropdown from "../../dropdown.react";
 
 import { forms as Forms, ternaryFunc } from "../../../util/methods";
@@ -29,9 +33,9 @@ class PollEditView extends React.Component {
      * TODO: external LabelledDropdown
      */
     return (
-      <div id="pv-poll-edit">
-        <section id="pv-pe-sidebar">
-          <span>Icon</span>
+      <SidebarView>
+        <SidebarWrapper>
+          <span className="pvc-sw-icon">Icon</span>
 
           <input
             type="text"
@@ -46,9 +50,9 @@ class PollEditView extends React.Component {
             onChange={this.onDescriptionChange}
             rows={10}
           />
-        </section>
+        </SidebarWrapper>
 
-        <section id="pv-pe-products">
+        <SidebarContentWrapper id="pv-pe-products">
           <header>
             <div>
               <p>Select Product(s)</p>
@@ -62,21 +66,21 @@ class PollEditView extends React.Component {
 
           <article>
             <ul>
-              <li className="pv-product-card-small" />
-              <li className="pv-product-card-small selected" />
-              <li className="pv-product-card-small" />
-              <li className="pv-product-card-small" />
-              <li className="pv-product-card-small selected" />
-              <li className="pv-product-card-small" />
-              <li className="pv-product-card-small" />
-              <li className="pv-product-card-small selected" />
-              <li className="pv-product-card-small selected" />
-              <li className="pv-product-card-small" />
-              <li className="pv-product-card-small" />
-              <li className="pv-product-card-small" />
+              <li className="pvc-product-card-small" />
+              <li className="pvc-product-card-small selected" />
+              <li className="pvc-product-card-small" />
+              <li className="pvc-product-card-small" />
+              <li className="pvc-product-card-small selected" />
+              <li className="pvc-product-card-small" />
+              <li className="pvc-product-card-small" />
+              <li className="pvc-product-card-small selected" />
+              <li className="pvc-product-card-small selected" />
+              <li className="pvc-product-card-small" />
+              <li className="pvc-product-card-small" />
+              <li className="pvc-product-card-small" />
             </ul>
           </article>
-        </section>
+        </SidebarContentWrapper>
 
         <div id="pc-form-bottombar">
           <ul>
@@ -94,7 +98,7 @@ class PollEditView extends React.Component {
             </li>
           </ul>
         </div>
-      </div>
+      </SidebarView>
     );
   }
 };
