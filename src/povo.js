@@ -14,7 +14,7 @@ import PollView from "./lib/ui/poll/view.react";
 import PollEditView from "./lib/ui/poll/edit.react";
 import PollResultsView from "./lib/ui/poll/results.react";
 import RewardView from "./lib/ui/reward/view.react";
-import RewardListView from "./lib/ui/reward/list.react";
+import RewardIndexView from "./lib/ui/reward/index.react";
 
 import { ternaryFunc } from "./lib/util/methods";
 
@@ -27,7 +27,7 @@ const RouteTable = {
   "u.poll.results": PollResultsView,
 
   "u.reward": RewardView,
-  "u.reward.list": RewardListView,
+  "u.rewards": RewardIndexView,
 };
 
 class POVO extends Routable {
@@ -79,7 +79,7 @@ class POVO extends Routable {
 
         this.navigate(Immutable.Map({
           // route: "p.home",
-          route: "u.poll.edit",
+          route: "u.rewards",
         }));
       });
   }
