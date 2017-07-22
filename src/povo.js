@@ -81,7 +81,7 @@ class POVO extends Routable {
 
         this.navigate(Immutable.Map({
           // route: "p.home",
-          route: "u.polls",
+          route: "u.profile",
         }));
       });
   }

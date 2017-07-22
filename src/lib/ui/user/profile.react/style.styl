@@ -1,0 +1,167 @@
+#pv-up-sidebar
+  .pvc-fake-avatar
+    margin-bottom 35px
+
+#pv-up-content .pvc-won-product-card
+  margin-bottom 36px
+
+  &:last-child
+    margin-bottom 0
+
+#pv-upbi-name
+  font-weight bold
+  font-size 20px
+  margin-bottom 10px
+
+#pv-upbi-email
+  font-size 16px
+  margin-bottom 10px
+
+#pv-upbi-birthday
+  font-size 16px
+  margin-bottom 20px
+
+#pv-up-basic-info + hr
+  margin-top 10px
+
+#pv-up-reward-info
+  > p:first-child
+    font-weight bold  
+    text-transform uppercase
+    margin-bottom 10px
+
+  & + hr
+    margin-bottom 40px
+
+#pv-upri-points
+  display block
+
+  font-size 42px
+  font-weight lighter
+
+  padding-bottom 20px
+
+// TODO: Extract
+.pvc-sidebar-icon-link
+  display flex
+  flex-direction row
+  color #666
+
+  p
+    width 100%
+    max-width 100px
+    margin 0 10px
+
+// TODO: delete
+.pvc-fake-avatar
+  border-radius 64px
+  width 128px
+  height 128px
+  background #999
+
+// TODO: extract
+.pvc-won-product-card
+  width 100%
+  max-width 700px
+
+.pvc-wpc-header
+  display flex
+  flex-direction row
+  margin-bottom 14px
+
+  p
+    width 100%
+
+  a
+    color #999
+    white-space nowrap
+
+.pvc-wpc-image
+  border-top-left-radius 8px
+  border-top-right-radius 8px
+  background #999
+
+  height 200px
+
+.pvc-wpc-footer
+  background #fff
+
+  border-bottom-left-radius 8px
+  border-bottom-right-radius 8px
+  border 2px solid #999
+
+  height 65px
+  padding 0 20px
+
+  > ul
+    display flex
+    flex-direction row
+
+    > li:first-child
+      width 100%
+      text-align right
+      margin-right 50px
+
+  p
+    white-space nowrap
+
+.pvc-icon-button, .pvc-button
+  margin-top 13px
+
+  line-height 36px
+  height 36px
+
+.pvc-icon-button
+  background transparent
+  border none
+
+  &, > *
+    display inline-block
+
+  .pt-icon-standard
+    margin-right 20px  
+
+.pvc-button
+  background #666
+  border-radius 8px
+  color #fff
+
+  padding 0 28px
+  line-height 40px
+  font-weight bold
+
+// TODO: extract
+.pvc-tab-button
+  a
+    display flex  
+    flex-direction row
+
+    > *
+      height 24px
+
+    .pt-icon-standard
+      font-size 14px
+      line-height 20px
+    
+    > p
+      width 100%
+      padding-left 10px
+      line-height 24px
+      text-transform uppercase
+
+  &.active a
+    border-bottom 4px solid #999
+
+  & + .pvc-tab-button
+    margin-left 40px
+
+#pv-up-products-header
+  > *, > ul > li
+    display inline-block
+    vertical-align top
+
+  h1
+    font-size 24px
+    text-transform uppercase
+    margin-right 55px
+    line-height 28px
