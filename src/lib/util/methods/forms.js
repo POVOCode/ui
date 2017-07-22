@@ -47,6 +47,16 @@ export default {
     };
   },
 
+  /**
+   * Sets up a new form-controlled state key/value pair, registering the
+   * callback & setting up initial state. See options.
+   *
+   * @param {Object} elm 
+   * @option elm {Object} c component to modify
+   * @option elm {String} key name of state key to save data under
+   * @option elm {Any} val initial value
+   * @option elm {Method} cb name of callback to create & register
+   */
   setupComponentFormElement(elm) {
     const { c, key, val, cb } = elm;
 

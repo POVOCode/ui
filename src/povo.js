@@ -78,7 +78,8 @@ class POVO extends Routable {
         Bus.resetState({ noUpdate: true });
 
         this.navigate(Immutable.Map({
-          route: "p.home",
+          // route: "p.home",
+          route: "u.poll.edit",
         }));
       });
   }
