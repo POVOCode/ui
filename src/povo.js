@@ -11,6 +11,7 @@ import BottomBar from "./lib/ui/nav/bottombar.react";
 import HomeView from "./lib/ui/public/home.react";
 import UserProfileView from "./lib/ui/user/profile.react";
 import PollView from "./lib/ui/poll/view.react";
+import PollIndexView from "./lib/ui/poll/index.react";
 import PollEditView from "./lib/ui/poll/edit.react";
 import PollResultsView from "./lib/ui/poll/results.react";
 import RewardView from "./lib/ui/reward/view.react";
@@ -23,6 +24,7 @@ const RouteTable = {
   "u.profile": UserProfileView,
 
   "u.poll": PollView,
+  "u.polls": PollIndexView,
   "u.poll.edit": PollEditView,
   "u.poll.results": PollResultsView,
 
@@ -79,7 +81,7 @@ class POVO extends Routable {
 
         this.navigate(Immutable.Map({
           // route: "p.home",
-          route: "u.rewards",
+          route: "u.polls",
         }));
       });
   }
