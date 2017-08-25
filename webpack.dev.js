@@ -2,7 +2,7 @@ module.exports = {
   devtool: "cheap-module-source-map",
 
   entry: [
-    "webpack-dev-server/client?http://localhost:8888",
+    "webpack-dev-server/client?http://localhost:9999",
     "webpack/hot/only-dev-server",
     "./src/index.js",
     "./src/index.html"
@@ -39,7 +39,7 @@ module.exports = {
   devServer: {
     contentBase: "./dist",
     hot: true,
-    port: 8888,
+    port: 9999,
 
     historyApiFallback: {
       index: "index.html"

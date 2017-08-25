@@ -64,10 +64,10 @@ const UserActions = (bus) => {
      * Creates a session for the user on the server and saves their data locally
      */
     login(data) {
-      const { username, password } = data;
+      const { email, password } = data;
 
       return UserAPI.login({
-        username,
+        username: email,
         password,
       }).then(({ user }) => {
         user.id = String(user.id);

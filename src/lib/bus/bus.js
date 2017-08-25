@@ -32,6 +32,16 @@ const Bus = {
   state: existingData || getFreshState(),
   updateListeners: [],
 
+  getDebugInfo() {
+    const jsState = Bus.state.toJS();
+    const serialized = JSON.stringify(jsState);
+
+    return [
+      `${Object.keys(jsState).length} keys`,
+      `${Math.floor((serialized.length / 1024) * 1000) / 1000}kB`,
+    ].join(", ");
+  },
+
   resetState(opts) {
     const noUpdate = opts ? !!opts.noUpdate : false;
     const oldState = Bus.state;

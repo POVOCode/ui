@@ -2,17 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import Immutable from "immutable";
 
+import Logo from "../../logo.react";
 import { mergeClassNames } from "../../../util/methods";
 import "./style.styl";
 
-const NavBar = ({ currentLocation, navigate, links }) => {
+const NavBar = ({ logoRoute, logoPayload, currentLocation, navigate, links }) => {
   const route = currentLocation.get("route");
 
   return (
     <nav id="pv-navbar">
-      <div id="fake-logo">
-        POVO
-      </div>
+      <Logo
+        onClick={(e) => {
+          navigate(new Immutable.Map({
+            route: logoRoute || "p.home",
+          }));
+        }}
+      />
 
       <ul>
         {links.map(l =>
@@ -44,10 +49,12 @@ const NavBar = ({ currentLocation, navigate, links }) => {
 };
 
 NavBar.propTypes = {
-  bordered: PropTypes.bool,
   navigate: PropTypes.func.isRequired,
   currentLocation: PropTypes.object,
   links: PropTypes.array,
+
+  logoRoute: PropTypes.string,
+  logoPayload: PropTypes.object,
 };
 
 export default NavBar;

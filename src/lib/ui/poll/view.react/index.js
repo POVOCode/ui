@@ -15,7 +15,7 @@ class PollView extends React.Component {
 
   render() {
     return (
-      <div id="pv-poll">
+      <div id="pv-poll-view">
       </div>
     );
   }

@@ -1,0 +1,37 @@
+.pvc-leaderboard
+  > p
+    font-weight bold
+    margin-bottom 26px
+
+  hr
+    margin 40px 0
+    border-color rgba(0, 0, 0, 0.2)
+  
+  li
+    display flex
+    flex-direction row
+    margin-bottom 10px
+
+    &:last-child
+      margin-bottom 0
+
+  .pvc-l-label
+    width 100%
+    flex 1
+
+    // No value
+    &:last-child
+      padding-right 30%
+
+  .pvc-l-value
+    color auto
+
+    &.gray
+      color #999
+
+  &.italics .pvc-l-label
+    font-style italic
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+    padding-right 40px

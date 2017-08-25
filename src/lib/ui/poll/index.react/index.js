@@ -6,6 +6,7 @@ import SidebarView from "../../sidebar_view.react";
 import SidebarWrapper from "../../sidebar_wrapper.react";
 import SidebarContentWrapper from "../../sidebar_content_wrapper.react";
 import Dropdown from "../../dropdown.react";
+import Leaderboard from "../../leaderboard.react";
 
 import { ternaryFunc } from "../../../util/methods";
 import "./style.styl";
@@ -18,26 +19,7 @@ class PollIndexView extends React.Component {
     this.state = {};
   }
 
-  /**
-   * TODO: external LeadboardList
-   */
   render() {
-    const fakePopularPollData = [
-      { label: "Sisters Birthday?" },
-      { label: "What gear is more suitable for outasdfasfdasfd" },
-      { label: "Approaching 10 year wedding anniversaryasdfasdf" },
-      { label: "Dogs or cats?" },
-      { label: "Gift for a 4 year old" },
-    ];
-
-    const fakePollCreationData = [
-      { label: "Sisters Birthday?", responses: 8 },
-      { label: "What gear is more suitable for outasdfasfdasfd", responses: 0 },
-      { label: "Approaching 10 year wedding anniversaryasdfasdf", responses: 2 },
-      { label: "Dogs or cats?", responses: 3 },
-      { label: "Gift for a 4 year old", responses: 4 },
-    ];
-
     return (
       <SidebarView id="pv-polls">
         <SidebarWrapper>
@@ -56,34 +38,34 @@ class PollIndexView extends React.Component {
               label: "All Categories",
             }])}
           />
-       
 
           <hr />
 
-          <div className="pvc-labelled-keys-values created">
-            <p>Created Recently</p>
-            <ul>
-              {fakePollCreationData.map(entry =>
-                <li>
-                  <p className="pvc-lkv-label">{entry.label}</p>
-                  <p className="pvc-lkv-value">{entry.responses} Response(s)</p>
-                </li>
-              )}
-            </ul>
-          </div>
+          <Leaderboard
+            title="Created Recently"
+            italics={true}
+            data={[
+              { label: "Sisters Birthday?", value: 8 },
+              { label: "What gear is more suitable for outasdfasfdasfd", value: 0 },
+              { label: "Approaching 10 year wedding anniversaryasdfasdf", value: 2 },
+              { label: "Dogs or cats?", value: 3 },
+              { label: "Gift for a 4 year old", value: 4 },
+            ]}
+          />
 
           <hr />
 
-          <div className="pvc-labelled-keys-values">
-            <p>Most Popular Polls</p>
-            <ul>
-              {fakePopularPollData.map(entry =>
-                <li>
-                  <p className="pvc-lkv-label">{entry.label}</p>
-                </li>
-              )}
-            </ul>
-          </div>
+          <Leaderboard
+            title="Most Popular Polls"
+            italics={true}
+            data={[
+              { label: "Sisters Birthday?" },
+              { label: "What gear is more suitable for outasdfasfdasfd" },
+              { label: "Approaching 10 year wedding anniversaryasdfasdf" },
+              { label: "Dogs or cats?" },
+              { label: "Gift for a 4 year old" },
+            ]}
+          />
 
           <hr />
         </SidebarWrapper>

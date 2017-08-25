@@ -1,0 +1,36 @@
+#pvc-dev-info-bar
+  z-index 9999999999
+  position fixed
+  bottom 0
+  left 0
+
+  height 32px
+  width 100%
+  padding 8px 32px
+
+  color #fff
+  background #000
+  font-size 11px
+  font-family monospace
+
+  border-top 1px solid red
+
+  > *
+    display inline-block
+    vertical-align middle
+    margin-right 10px
+
+    &:first-child
+      color #00ff00
+      margin-right 20px
+      padding-right 20px
+      border-right 1px solid #555
+
+    &:last-child
+      margin-right 0
+    
+    &.label
+      margin-right 5px
+    
+    &.value
+      margin-right 10px

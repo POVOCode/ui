@@ -7,6 +7,7 @@ import Routable from "./lib/routable.react";
 import NavBar from "./lib/ui/nav/navbar.react";
 import ModalToaster from "./lib/ui/notifications/modal_toaster.react";
 import BottomBar from "./lib/ui/nav/bottombar.react";
+import DevInfoBar from "./lib/ui/dev_info.react";
 
 import HomeView from "./lib/ui/public/home.react";
 import UserProfileView from "./lib/ui/user/profile.react";
@@ -17,7 +18,14 @@ import PollResultsView from "./lib/ui/poll/results.react";
 import RewardView from "./lib/ui/reward/view.react";
 import RewardIndexView from "./lib/ui/reward/index.react";
 
+import ModalLoginForm from "./lib/ui/modals/login.react";
+import ModalSignupForm from "./lib/ui/modals/signup.react";
+
 import { ternaryFunc } from "./lib/util/methods";
+
+import "./lib/ui/css_components/fake_logo.styl";
+import "./lib/ui/css_components/li_active_marker.styl";
+import "./lib/ui/css_components/screen_fader.styl";
 
 const RouteTable = {
   "p.home": HomeView,
@@ -35,13 +43,23 @@ const RouteTable = {
 class POVO extends Routable {
 
   constructor(props) {
-    super(props);
+    super(props, "pv");
 
     this.state.busState = Bus.state;
     this.state.fadeScreen = false;
+    this.state.loginFormOpen = false;
+    this.state.signupFormOpen = false;
 
     this.onLogout = this.onLogout.bind(this);
     this.onBusUpdate = this.onBusUpdate.bind(this);
+
+    this.onLoginClick = this.onLoginClick.bind(this);
+    this.onLoginCloseClick = this.onLoginCloseClick.bind(this);
+    this.onLoginSubmitClick = this.onLoginSubmitClick.bind(this);
+
+    this.onSignupClick = this.onSignupClick.bind(this);
+    this.onSignupCloseClick = this.onSignupCloseClick.bind(this);
+    this.onSignupSubmitClick = this.onSignupSubmitClick.bind(this);
   }
 
   componentDidMount() {
@@ -80,8 +98,8 @@ class POVO extends Routable {
         Bus.resetState({ noUpdate: true });
 
         this.navigate(Immutable.Map({
-          // route: "p.home",
-          route: "u.profile",
+          route: "u.poll.edit",
+          // route: "u.profile",
         }));
       });
   }
@@ -99,6 +117,63 @@ class POVO extends Routable {
         actions[actions.autoload]();
       }
     }
+  }
+
+  onSignupClick() {
+    this.setState(() => ({
+      signupFormOpen: true,
+      loginFormOpen: false,
+    }));
+  }
+
+  onSignupCloseClick() {
+    this.setState(() => ({
+      signupFormOpen: false,
+    }));
+  }
+
+  onSignupSubmitClick({ username, email, postcode }) {
+    console.log({ username, email, postcode });
+  }
+
+  onLoginClick() {
+    this.setState(() => ({
+      loginFormOpen: true,
+      signupFormOpen: false,
+    }));
+  }
+
+  onLoginCloseClick() {
+    this.setState(() => ({
+      loginFormOpen: false,
+    }));
+  }
+
+  onLoginSubmitClick({ email, password }) {
+    this.setState(() => ({
+      fadeScreen: true,
+    }));
+
+    Bus.actions.user.login({
+      email,
+      password,
+    }).then(() => {
+      this.setState(() => ({
+        fadeScreen: false,
+        lastError: null,
+      }));
+
+      this.props.navigate(Immutable.Map({
+        route: "u.polls"
+      }));
+    }).catch((e) => {
+      if (e && e.message) {
+        this.setState(() => ({
+          fadeScreen: false,
+          lastError: e.message,
+        }));
+      }
+    });
   }
 
   onBusUpdate({ prev, curr }) {
@@ -145,23 +220,37 @@ class POVO extends Routable {
     const viewHTML = this.renderView();
     const loc = this.getCurrentLocation();
 
+    // TODO: Remove these
+    console.log("Rendered route:");
+    console.log(JSON.stringify(loc.toJS()));
+
     return (
       <div id="pv">
+        {ternaryFunc(this.state.fadeScreen, () =>
+          <div id="pv-screen-fader" />
+        )}
+
+        <DevInfoBar
+          currentLocation={loc}
+        />
+
         <NavBar
           navigate={this.navigate}
           currentLocation={loc}
+          logoRoute="p.home"
           links={[{
             bordered: true,
             label: "Create Poll",
             href: "#",
           }, {
             label: "Login",
-            href: "#",
+            href: "javascript:void(0)",
+            onClick: this.onLoginClick,
           }, {
             label: "Sign up",
-            href: "#",
+            href: "javascript:void(0)",
+            onClick: this.onSignupClick,
           }]}
-
         />
 
         <ModalToaster
@@ -190,7 +279,23 @@ class POVO extends Routable {
             href: "#",
           }]}
         />
-      </div>
+
+        {ternaryFunc(this.state.loginFormOpen, () =>
+          <ModalLoginForm
+            onSubmit={this.onLoginSubmitClick}
+            onClose={this.onLoginCloseClick}
+            onSignupClick={this.onSignupClick}
+          />
+        )}
+
+         {ternaryFunc(this.state.signupFormOpen, () =>
+          <ModalSignupForm
+            onSubmit={this.onSignupSubmitClick}
+            onClose={this.onSignupCloseClick}
+            onLoginClick={this.onLoginClick}
+          />
+        )}
+     </div>
     );
   }
 }

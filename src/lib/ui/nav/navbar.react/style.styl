@@ -9,11 +9,14 @@ $nav_height = 64px - 1px // border
   border-bottom 1px solid #c9f2ff
   background #fff
 
+  .pvc-logo
+    flex 1
+
   > *:first-child
-    padding-left 44px
+    margin-left 44px
 
   > *:last-child
-    padding-right 44px
+    margin-right 44px
 
   &, > ul
     display flex
@@ -49,12 +52,3 @@ $nav_height = 64px - 1px // border
 
         display inline-block
         vertical-align middle
-
-#fake-logo
-  height $nav_height
-  line-height $nav_height
-
-  flex 1
-
-  font-size 24px
-  font-weight bold

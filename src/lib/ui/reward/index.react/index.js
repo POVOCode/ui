@@ -6,8 +6,10 @@ import SidebarView from "../../sidebar_view.react";
 import SidebarWrapper from "../../sidebar_wrapper.react";
 import SidebarContentWrapper from "../../sidebar_content_wrapper.react";
 import Dropdown from "../../dropdown.react";
+import Leaderboard from "../../leaderboard.react";
 
 import { ternaryFunc } from "../../../util/methods";
+
 import "./style.styl";
 
 class RewardIndexView extends React.Component {
@@ -18,26 +20,7 @@ class RewardIndexView extends React.Component {
     this.state = {};
   }
 
-  /**
-   * TODO: external LeadboardList
-   * TODO: external RedeemEventList
-   */
   render() {
-    const fakeLeaderboardData = [
-      { label: "Big Screen TV", score: 1290 },
-      { label: "4k Ultra Monitor", score: 1800 },
-      { label: "Ultimate Fishing Gears", score: 3000 },
-      { label: "Wearable Watch", score: 6000 },
-      { label: "Home Monitoring System", score: 9080 },
-    ];
-
-    const fakeRedeemHistory = [
-      { label: "Big Screen TV", date: Date.now() },
-      { label: "$5 Gift Card", date: Date.now() },
-      { label: "$5 Gift Card", date: Date.now() },
-      { label: "8GB USB Key", date: Date.now() },
-    ];
-
     return (
       <SidebarView id="pv-rewards">
         <SidebarWrapper>
@@ -57,48 +40,44 @@ class RewardIndexView extends React.Component {
             }])}
           />
        
+          <hr />
+
+          <Leaderboard
+            title="Top Picks"
+            data={[
+              { label: "Big Screen TV", value: 1290 },
+              { label: "4k Ultra Monitor", value: 1800 },
+              { label: "Ultimate Fishing Gears", value: 3000 },
+              { label: "Wearable Watch", value: 6000 },
+              { label: "Home Monitoring System", value: 9080 },
+            ]}
+          />
 
           <hr />
 
-          <div className="pvc-labelled-keys-values">
-            <p>Top Picks</p>
-            <ul>
-              {fakeLeaderboardData.map(entry =>
-                <li>
-                  <p className="pvc-lkv-label">{entry.label}</p>
-                  <p className="pvc-lkv-value">{entry.score}pts</p>
-                </li>
-              )}
-            </ul>
-          </div>
+          <Leaderboard
+            title="Staff Picks"
+            data={[
+              { label: "Big Screen TV", value: 1290 },
+              { label: "4k Ultra Monitor", value: 1800 },
+              { label: "Ultimate Fishing Gears", value: 3000 },
+              { label: "Wearable Watch", value: 6000 },
+              { label: "Home Monitoring System", value: 9080 },
+            ]}
+          />
 
           <hr />
 
-          <div className="pvc-labelled-keys-values">
-            <p>Staff Picks</p>
-            <ul>
-              {fakeLeaderboardData.map(entry =>
-                <li>
-                  <p className="pvc-lkv-label">{entry.label}</p>
-                  <p className="pvc-lkv-value">{entry.score}pts</p>
-                </li>
-              )}
-            </ul>
-          </div>
-
-          <hr />
-
-          <div className="pvc-labelled-keys-values pvc-redeem-event-list">
-            <p>Redeem History</p>
-            <ul>
-              {fakeRedeemHistory.map(entry =>
-                <li>
-                  <p className="pvc-lkv-label">{entry.label}</p>
-                  <p className="pvc-lkv-value">{new Date(entry.date).toLocaleDateString()}</p>
-                </li>
-              )}
-            </ul>
-          </div>
+          <Leaderboard
+            title="Redeem History"
+            valColor="#999"
+            data={[
+              { label: "Big Screen TV", value: new Date().toLocaleDateString() },
+              { label: "$5 Gift Card", value: new Date().toLocaleDateString() },
+              { label: "$25 Gift Card", value: new Date().toLocaleDateString() },
+              { label: "8GB USB Key", value: new Date().toLocaleDateString() },
+            ]}
+          />
         </SidebarWrapper>
 
         <SidebarContentWrapper id="pv-r-reward-list">
@@ -130,7 +109,7 @@ class RewardIndexView extends React.Component {
           <article>
             <ul>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map((i) =>
-                <li className="pvc-reward-card-small">
+                <li className="pvc-reward-card-small" key={i}>
                   <div>
                     <div className="pvc-rcs-img" />
                     <p className="pvc-rcs-value">{i * 100}pts</p>

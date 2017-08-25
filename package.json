@@ -53,7 +53,7 @@
   "config": {
     "neutrino": {
       "devServer": {
-        "port": 5000
+        "port": 9999
       },
       "entry": {
         "react": [
