@@ -230,9 +230,12 @@ class POVO extends Routable {
           <div id="pv-screen-fader" />
         )}
 
-        <DevInfoBar
-          currentLocation={loc}
-        />
+        {/* Disabled for now */}
+        {ternaryFunc(false, () =>
+          <DevInfoBar
+            currentLocation={loc}
+          />
+        )}
 
         <NavBar
           navigate={this.navigate}
@@ -253,12 +256,12 @@ class POVO extends Routable {
           }]}
         />
 
-        <ModalToaster
+        {/*<ModalToaster
           toast={Immutable.Map({
             message: "Get 40 points when you sign up",
             onClick: (() => {}), // To get the icon
           })}
-        />
+        />*/}
 
         {viewHTML}
 

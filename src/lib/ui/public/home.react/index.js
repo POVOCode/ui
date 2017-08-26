@@ -4,6 +4,7 @@ import Immutable from "immutable";
 
 import Dropdown from "../../dropdown.react";
 import PollCard from "../../poll/card.react";
+import TextCard from "../../poll/text_card.react";
 
 import { ternaryFunc } from "../../../util/methods";
 import "./style.styl";
@@ -48,7 +49,7 @@ class HomeView extends React.Component {
       <div id="pv-home">
         <section id="pv-collection-browser">
           <div id="pv-cb-inner">
-            <header>
+            {/*<header>
               <ul>
                 <li>
                   <a href="#">Newest</a>
@@ -75,9 +76,91 @@ class HomeView extends React.Component {
                   label: "View all Polls",
                 }])}
               />
-            </header>
+            </header>*/}
+
+            <p id="pv-h-teaser-text">Povo is an online marketplace for users to share ideas and gain feedback from other users about the purchases they are making online. Users are rewarded upon creating, sharing and up-voting content to offer the ultimate online shopping experience.</p>
 
             <div className="pv-card-grid">
+              <div className="pv-cg-column pv-cgc-two">
+                <div className="pv-cgg-quarter-cell">
+                  <PollCard
+                    poll={Immutable.fromJS({
+                      title: "Best keyboard of 2017?",
+                      author: "rachelmk",
+                      date: Date.now(),
+                      rewards: [
+                        { image: "/img/products/keyboards/1.jpg" },
+                        { image: "/img/products/keyboards/2.jpg" },
+                        { image: "/img/products/keyboards/3.jpg" },
+                        { image: "/img/products/keyboards/4.jpg" },
+                      ]
+                    })}
+                  />
+
+                  <PollCard
+                    poll={Immutable.fromJS({
+                      title: "Which LEGO set do you want?",
+                      author: "xansal",
+                      date: Date.now(),
+                      rewards: [
+                        { image: "/img/products/lego/1.jpg" },
+                        { image: "/img/products/lego/2.jpg" },
+                        { image: "/img/products/lego/3.jpg" },
+                        { image: "/img/products/lego/4.jpg" },
+                      ]
+                    })}
+                  />
+                </div>
+
+                <div className="pv-cgg-quarter-cell">
+                   <TextCard>
+                    <p>Some things users will be able to do include:</p>
+
+                    <ul>
+                      <li>
+                        <p>Create polls to gather feedback from the real world, and to identify winning products</p>
+                      </li>
+
+                      <li>
+                        <p>Vote &amp; comment on polls to help other users find the products that suite their needs best</p>
+                      </li>
+
+                      <li>
+                        <p>Purchase products via our platform for rewards including POVO points, free shipping, and exclusive discount opportunities</p>
+                      </li>
+                    </ul>
+                  </TextCard>
+                </div>
+
+                <div className="pv-cgg-quarter-cell">
+                  <PollCard
+                    poll={Immutable.fromJS({
+                      title: "Which sofa for a studio flat?",
+                      author: "sytchen",
+                      date: Date.now(),
+                      rewards: [
+                        { image: "/img/products/sofas/1.jpg" },
+                        { image: "/img/products/sofas/2.jpg" },
+                        { image: "/img/products/sofas/3.jpg" },
+                      ]
+                    })}
+                  />
+
+                  <PollCard
+                    poll={Immutable.fromJS({
+                      title: "Teapots: Are these any good?",
+                      author: "mike",
+                      date: Date.now(),
+                      rewards: [
+                        { image: "/img/products/teapots/1.jpg" },
+                        { image: "/img/products/teapots/2.jpg" },
+                        { image: "/img/products/teapots/3.jpg" },
+                      ]
+                    })}
+                  />
+                </div>
+              </div>
+
               <div className="pv-cg-column pv-cgc-two">
                 <div className="pv-cgg-modal-cell">
                   <PollCard
@@ -124,98 +207,11 @@ class HomeView extends React.Component {
                   />
                 </div>
               </div>
-
-              <div className="pv-cg-column pv-cgc-two">
-                <div className="pv-cgg-quarter-cell">
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Best keyboard of 2017?",
-                      author: "rachelmk",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/keyboards/1.jpg" },
-                        { image: "/img/products/keyboards/2.jpg" },
-                        { image: "/img/products/keyboards/3.jpg" },
-                        { image: "/img/products/keyboards/4.jpg" },
-                      ]
-                    })}
-                  />
-
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Which LEGO set do you want?",
-                      author: "xansal",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/lego/1.jpg" },
-                        { image: "/img/products/lego/2.jpg" },
-                        { image: "/img/products/lego/3.jpg" },
-                        { image: "/img/products/lego/4.jpg" },
-                      ]
-                    })}
-                  />
-                  
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Which sofa for a studio flat?",
-                      author: "sytchen",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/sofas/1.jpg" },
-                        { image: "/img/products/sofas/2.jpg" },
-                        { image: "/img/products/sofas/3.jpg" },
-                      ]
-                    })}
-                  />
-
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Teapots: Are these any good?",
-                      author: "mike",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/teapots/1.jpg" },
-                        { image: "/img/products/teapots/2.jpg" },
-                        { image: "/img/products/teapots/3.jpg" },
-                      ]
-                    })}
-                  />
-                </div>
-
-                <div className="pv-cgg-quarter-cell">
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Putting together a wood shop",
-                      author: "edwin1243",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/saw/1.jpg" },
-                        { image: "/img/products/saw/2.jpg" },
-                        { image: "/img/products/saw/3.jpg" },
-                      ]
-                    })}
-                  />
-
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Which Android phone is future-proof?",
-                      author: "madnam",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/phones/1.jpg" },
-                        { image: "/img/products/phones/2.jpg" },
-                        { image: "/img/products/phones/3.jpg" },
-                        { image: "/img/products/phones/4.jpg" },
-                      ]
-                    })}
-                  />
-                </div>
-              </div>
             </div>
 
-            <div className="pv-cb-load">
+            {/*<div className="pv-cb-load">
               <button>Load More</button>
-            </div>
+            </div>*/}
           </div>
         </section>
       </div>

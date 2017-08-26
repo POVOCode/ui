@@ -3,6 +3,10 @@
 // TODO: Break out
 #pv-collection-browser
   background #f8f8f8
+  padding-bottom 20px
+
+  // For LP
+  user-select none
 
   #pv-cb-inner
     max-width 1200px
@@ -34,6 +38,14 @@
         a
           font-weight bold
           font-size 16px
+
+  #pv-h-teaser-text
+    text-align center
+    padding 50px 20%
+    display block
+    font-size 18px
+    line-height 1.5
+    font-weight 300
   
   .pv-card-grid
     display flex
@@ -61,6 +73,9 @@
 
       .pv-poll-card
         margin-bottom 17px
+
+        &.large
+          margin-bottom 80px
 
       .pv-cgg-quarter-cell .pv-poll-card
         width calc((100% - 19px) * 0.5)
