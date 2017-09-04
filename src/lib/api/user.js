@@ -55,6 +55,19 @@ class UserAPI extends BaseAPI {
     });
   }
 
+  preRegister({
+    username, email, password, postcode, interests, enableEmailUpdates
+  }) {
+    return this._post("/preregister", {
+      username,
+      email,
+      password,
+      postcode,
+      interests,
+      enableEmailUpdates,
+    });
+  }
+
   /**
    * @return {promise} promise
    */

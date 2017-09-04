@@ -20,6 +20,8 @@ import RewardIndexView from "./lib/ui/reward/index.react";
 
 import ModalLoginForm from "./lib/ui/modals/login.react";
 import ModalSignupForm from "./lib/ui/modals/signup.react";
+import ModalPreRegisterForm from "./lib/ui/modals/pre_register.react";
+import ModalPreRegisterConfirmation from "./lib/ui/modals/pre_register_confirmation.react";
 
 import { ternaryFunc } from "./lib/util/methods";
 
@@ -49,6 +51,8 @@ class POVO extends Routable {
     this.state.fadeScreen = false;
     this.state.loginFormOpen = false;
     this.state.signupFormOpen = false;
+    this.state.preRegisterFormOpen = false;
+    this.state.preRegisterConfirmationOpen = false;
 
     this.onLogout = this.onLogout.bind(this);
     this.onBusUpdate = this.onBusUpdate.bind(this);
@@ -60,6 +64,11 @@ class POVO extends Routable {
     this.onSignupClick = this.onSignupClick.bind(this);
     this.onSignupCloseClick = this.onSignupCloseClick.bind(this);
     this.onSignupSubmitClick = this.onSignupSubmitClick.bind(this);
+
+    this.onPreRegisterClick = this.onPreRegisterClick.bind(this);
+    this.onPreRegisterCloseClick = this.onPreRegisterCloseClick.bind(this);
+    this.onPreRegisterCompletion = this.onPreRegisterCompletion.bind(this);
+    this.onPreRegisterConfirmationCloseClick = this.onPreRegisterConfirmationCloseClick.bind(this);
   }
 
   componentDidMount() {
@@ -88,26 +97,23 @@ class POVO extends Routable {
 
         if (l.get("route")[0] !== "u") {
           this.navigate(Immutable.Map({
-            route: "u.poll",
+            route: "p.home",
           }));
         }
 
       }).catch((err) => {
-        console.error(err);
-
         Bus.resetState({ noUpdate: true });
 
         this.navigate(Immutable.Map({
-          route: "u.poll.edit",
-          // route: "u.profile",
+          route: "p.home",
         }));
       });
   }
 
   loadAllData() {
     const collections = [
-      "polls",
-      "rewards",
+      "poll",
+      "reward",
     ];
 
     for (let i = 0; i < collections.length; i++) {
@@ -123,6 +129,8 @@ class POVO extends Routable {
     this.setState(() => ({
       signupFormOpen: true,
       loginFormOpen: false,
+      preRegisterFormOpen: false,
+      preRegisterConfirmationOpen: false,
     }));
   }
 
@@ -140,6 +148,8 @@ class POVO extends Routable {
     this.setState(() => ({
       loginFormOpen: true,
       signupFormOpen: false,
+      preRegisterFormOpen: false,
+      preRegisterConfirmationOpen: false,
     }));
   }
 
@@ -174,6 +184,34 @@ class POVO extends Routable {
         }));
       }
     });
+  }
+
+  onPreRegisterClick() {
+    this.setState(() => ({
+      preRegisterFormOpen: true,
+      preRegisterConfirmationOpen: false,
+      loginFormOpen: false,
+      signupFormOpen: false,
+    }));
+  }
+
+  onPreRegisterCloseClick() {
+    this.setState(() => ({
+      preRegisterFormOpen: false,
+    }));
+  }
+
+  onPreRegisterConfirmationCloseClick() {
+    this.setState(() => ({
+      preRegisterConfirmationOpen: false,
+    }));
+  }
+
+  onPreRegisterCompletion() {
+     this.setState(() => ({
+      preRegisterFormOpen: false,
+      preRegisterConfirmationOpen: true,
+    }));
   }
 
   onBusUpdate({ prev, curr }) {
@@ -219,10 +257,45 @@ class POVO extends Routable {
   render() {
     const viewHTML = this.renderView();
     const loc = this.getCurrentLocation();
+    const user = this.state.busState.getIn(["user", "active"]);
 
-    // TODO: Remove these
-    console.log("Rendered route:");
-    console.log(JSON.stringify(loc.toJS()));
+    /*{
+      label: "Login",
+      href: "javascript:void(0)",
+      onClick: this.onLoginClick,
+    }, {
+      label: "Sign up",
+      href: "javascript:void(0)",
+      onClick: this.onSignupClick,
+    }*/
+
+    const navLinks = [];
+
+    if (user) {
+      console.log(user.toJS());
+
+      navLinks.push({
+        bordered: true,
+        label: "Create Poll",
+        href: "javascript:void(0)",
+        loc: Immutable.fromJS({
+          route: "u.poll.create",
+        }),
+      });
+
+      navLinks.push({
+        icon: "logout",
+        href: "javascript:void(0)",
+        onClick: this.onLogout,
+      });
+    } else {
+      navLinks.push({
+        bordered: true,
+        label: "Pre-Register",
+        href: "javascript:void(0)",
+        onClick: this.onPreRegisterClick,
+      });
+    }
 
     return (
       <div id="pv">
@@ -241,19 +314,7 @@ class POVO extends Routable {
           navigate={this.navigate}
           currentLocation={loc}
           logoRoute="p.home"
-          links={[{
-            bordered: true,
-            label: "Create Poll",
-            href: "#",
-          }, {
-            label: "Login",
-            href: "javascript:void(0)",
-            onClick: this.onLoginClick,
-          }, {
-            label: "Sign up",
-            href: "javascript:void(0)",
-            onClick: this.onSignupClick,
-          }]}
+          links={navLinks}
         />
 
         {/*<ModalToaster
@@ -291,11 +352,24 @@ class POVO extends Routable {
           />
         )}
 
-         {ternaryFunc(this.state.signupFormOpen, () =>
+        {ternaryFunc(this.state.signupFormOpen, () =>
           <ModalSignupForm
             onSubmit={this.onSignupSubmitClick}
             onClose={this.onSignupCloseClick}
             onLoginClick={this.onLoginClick}
+          />
+        )}
+
+        {ternaryFunc(this.state.preRegisterFormOpen, () =>
+          <ModalPreRegisterForm
+            onCompletion={this.onPreRegisterCompletion}
+            onClose={this.onPreRegisterCloseClick}
+          />
+        )}
+
+        {ternaryFunc(this.state.preRegisterConfirmationOpen, () =>
+          <ModalPreRegisterConfirmation
+            onClose={this.onPreRegisterConfirmationCloseClick}
           />
         )}
      </div>

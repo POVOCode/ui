@@ -1,0 +1,24 @@
+@require "../../style/colors.styl";
+
+.pvc-inline-checkbox
+  display flex
+  flex-direction row
+
+  i
+    margin-right 5px
+
+    &:hover
+      cursor pointer
+
+    &.unchecked
+      opacity 0.2
+
+    &.checked
+      opacity 1
+      color $pv_primary_color
+
+  p
+    flex 1
+    font-style italic
+    font-size 12px
+    padding-top 2px

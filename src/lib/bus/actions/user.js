@@ -95,6 +95,10 @@ const UserActions = (bus) => {
         return null;
       });
     },
+
+    preRegister(data) {
+      return UserAPI.preRegister(data);
+    },
   };
 
 };

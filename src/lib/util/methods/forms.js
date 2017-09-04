@@ -1,6 +1,13 @@
 export default {
   onChangeCallbackForType({ c, type, key, extraState }) {
-    if (type === "checkbox") {
+    if (type === "raw") {
+      return (e) => {
+        c.setState({
+          ...(extraState || {}),
+          [key]: e,
+        });
+      };
+    } else if (type === "checkbox") {
       return (e) => {
         c.setState({
           ...(extraState || {}),

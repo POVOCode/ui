@@ -54,6 +54,8 @@ const Bus = {
         curr: Bus.state,
       });
     }
+
+    Bus.persistState();
   },
 
   registerUpdateListener(cb) {

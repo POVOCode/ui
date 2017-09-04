@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Immutable from "immutable";
 
-import { mergeClassNames } from "../../../util/methods";
+import { ternaryFunc, mergeClassNames } from "../../../util/methods";
 import "./style.styl";
 
 const BottomBar = ({ currentLocation, navigate, links }) => {
@@ -14,7 +14,7 @@ const BottomBar = ({ currentLocation, navigate, links }) => {
 
       <ul>
         {links.map(l =>
-          <li key={l.label}>
+          <li key={l.label || l.icon}>
             <a
               href={l.href}
 
@@ -32,7 +32,11 @@ const BottomBar = ({ currentLocation, navigate, links }) => {
                 return false;
               }}
             >
-              {l.label}
+              {l.label || ""}
+
+              {ternaryFunc(l.icon, () =>
+                <i className={`icon-${l.icon}`} />
+              )}
             </a>
           </li>
         )}

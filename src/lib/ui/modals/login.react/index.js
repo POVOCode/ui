@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Immutable from "immutable";
 
-import Modal from "../../modal.react";
+import Modal from "../../modal";
+import CloseButton from "../../modal/close_button.react";
 import PHR from "../../p_hr.react";
 import Logo from "../../logo.react";
 
@@ -65,12 +66,7 @@ class ModalLoginForm extends React.Component {
   render() {
     return (
       <Modal onBlur={this.onCloseClick} innerID="pvc-modal-login">
-        <button
-          id="pvc-mlf-close"
-          className="icon-cancel"
-          onClick={this.onCloseClick}
-        ></button>
-
+        <CloseButton onClick={this.onCloseClick} />
         <Logo />
 
         <div id="pvc-mlf-form">
