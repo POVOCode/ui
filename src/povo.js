@@ -28,6 +28,7 @@ import { ternaryFunc } from "./lib/util/methods";
 import "./lib/ui/css_components/fake_logo.styl";
 import "./lib/ui/css_components/li_active_marker.styl";
 import "./lib/ui/css_components/screen_fader.styl";
+import "./lib/ui/css_components/content_wrapper.styl";
 
 const RouteTable = {
   "p.home": HomeView,

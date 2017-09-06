@@ -11,7 +11,7 @@ const NavBar = ({ logoRoute, logoPayload, currentLocation, navigate, links }) =>
 
   return (
     <nav id="pv-navbar">
-      <div id="pv-n-wrapper">
+      <div className="pvc-content-wrapper" id="pv-n-wrapper">
         <Logo
           onClick={(e) => {
             navigate(new Immutable.Map({

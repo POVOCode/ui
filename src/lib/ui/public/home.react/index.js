@@ -47,149 +47,147 @@ class HomeView extends React.Component {
   render() {
     return (
       <div id="pv-home">
-        <section id="pv-collection-browser">
-          <div id="pv-cb-inner">
-            <header>
-              <ul>
-                <li>
-                  <a href="#">Newest</a>
-                  <span className="pv-li-active-marker" />
-                </li>
+        <section id="pv-collection-browser" className="pvc-content-wrapper">
+          <header>
+            <ul>
+              <li>
+                <a href="#">Newest</a>
+                <span className="pv-li-active-marker" />
+              </li>
 
-                <li>
-                  <a href="#">Popular</a>
-                </li>
+              <li>
+                <a href="#">Popular</a>
+              </li>
 
-                <li>
-                  <a href="#">Ending Soon</a>
-                </li>
-              </ul>
+              <li>
+                <a href="#">Ending Soon</a>
+              </li>
+            </ul>
 
-              <Dropdown
-                value={Immutable.Map({
-                  value: "view_all",
-                  label: "View all Polls",
-                })}
+            <Dropdown
+              value={Immutable.Map({
+                value: "view_all",
+                label: "View all Polls",
+              })}
 
-                options={Immutable.fromJS([{
-                  value: "view_all",
-                  label: "View all Polls",
-                }])}
-              />
-            </header>
+              options={Immutable.fromJS([{
+                value: "view_all",
+                label: "View all Polls",
+              }])}
+            />
+          </header>
 
-            <div className="pv-card-grid">
-              <div className="pv-cg-column pv-cgc-two">
-                <div className="pv-cgg-quarter-cell">
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Best keyboard of 2017?",
-                      author: "rachelmk",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/keyboards/1.jpg" },
-                        { image: "/img/products/keyboards/2.jpg" },
-                        { image: "/img/products/keyboards/3.jpg" },
-                        { image: "/img/products/keyboards/4.jpg" },
-                      ]
-                    })}
-                  />
+          <div className="pv-card-grid">
+            <div className="pv-cg-column pv-cgc-two">
+              <div className="pv-cgg-quarter-cell">
+                <PollCard
+                  poll={Immutable.fromJS({
+                    title: "Best keyboard of 2017?",
+                    author: "rachelmk",
+                    date: Date.now(),
+                    rewards: [
+                      { image: "/img/products/keyboards/1.jpg" },
+                      { image: "/img/products/keyboards/2.jpg" },
+                      { image: "/img/products/keyboards/3.jpg" },
+                      { image: "/img/products/keyboards/4.jpg" },
+                    ]
+                  })}
+                />
 
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Which LEGO set do you want?",
-                      author: "xansal",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/lego/1.jpg" },
-                        { image: "/img/products/lego/2.jpg" },
-                        { image: "/img/products/lego/3.jpg" },
-                        { image: "/img/products/lego/4.jpg" },
-                      ]
-                    })}
-                  />
-                </div>
-
-                <div className="pv-cgg-quarter-cell">
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Which sofa for a studio flat?",
-                      author: "sytchen",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/sofas/1.jpg" },
-                        { image: "/img/products/sofas/2.jpg" },
-                        { image: "/img/products/sofas/3.jpg" },
-                      ]
-                    })}
-                  />
-
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Teapots: Are these any good?",
-                      author: "mike",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/teapots/1.jpg" },
-                        { image: "/img/products/teapots/2.jpg" },
-                        { image: "/img/products/teapots/3.jpg" },
-                      ]
-                    })}
-                  />
-                </div>
+                <PollCard
+                  poll={Immutable.fromJS({
+                    title: "Which LEGO set do you want?",
+                    author: "xansal",
+                    date: Date.now(),
+                    rewards: [
+                      { image: "/img/products/lego/1.jpg" },
+                      { image: "/img/products/lego/2.jpg" },
+                      { image: "/img/products/lego/3.jpg" },
+                      { image: "/img/products/lego/4.jpg" },
+                    ]
+                  })}
+                />
               </div>
 
-              <div className="pv-cg-column pv-cgc-two">
-                <div className="pv-cgg-modal-cell">
-                  <PollCard
-                    large={true}
-                    poll={Immutable.fromJS({
-                      title: "Which Fallout game is the best?",
-                      teaser: "I'm new to fallout, and want to know where to start.",
-                      author: "gman42",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/fallout/1.jpg" },
-                        { image: "/img/products/fallout/2.jpg" },
-                        { image: "/img/products/fallout/3.png" },
-                        { image: "/img/products/fallout/4.png" },
-                      ]
-                    })}
-                  />
-                </div>
+              <div className="pv-cgg-quarter-cell">
+                <PollCard
+                  poll={Immutable.fromJS({
+                    title: "Which sofa for a studio flat?",
+                    author: "sytchen",
+                    date: Date.now(),
+                    rewards: [
+                      { image: "/img/products/sofas/1.jpg" },
+                      { image: "/img/products/sofas/2.jpg" },
+                      { image: "/img/products/sofas/3.jpg" },
+                    ]
+                  })}
+                />
 
-                <div className="pv-cgg-quarter-cell">
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Headphones; in or over ear?",
-                      author: "rachelmk",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/headphones/1.jpg" },
-                        { image: "/img/products/headphones/2.jpg" },
-                      ]
-                    })}
-                  />
-
-                  <PollCard
-                    poll={Immutable.fromJS({
-                      title: "Winter is coming",
-                      author: "bash",
-                      date: Date.now(),
-                      rewards: [
-                        { image: "/img/products/jackets/1.jpg" },
-                        { image: "/img/products/jackets/2.jpg" },
-                        { image: "/img/products/jackets/3.jpg" },
-                      ]
-                    })}
-                  />
-                </div>
+                <PollCard
+                  poll={Immutable.fromJS({
+                    title: "Teapots: Are these any good?",
+                    author: "mike",
+                    date: Date.now(),
+                    rewards: [
+                      { image: "/img/products/teapots/1.jpg" },
+                      { image: "/img/products/teapots/2.jpg" },
+                      { image: "/img/products/teapots/3.jpg" },
+                    ]
+                  })}
+                />
               </div>
             </div>
 
-            <div className="pv-cb-load">
-              <button>Load More</button>
+            <div className="pv-cg-column pv-cgc-two">
+              <div className="pv-cgg-modal-cell">
+                <PollCard
+                  large={true}
+                  poll={Immutable.fromJS({
+                    title: "Which Fallout game is the best?",
+                    teaser: "I'm new to fallout, and want to know where to start.",
+                    author: "gman42",
+                    date: Date.now(),
+                    rewards: [
+                      { image: "/img/products/fallout/1.jpg" },
+                      { image: "/img/products/fallout/2.jpg" },
+                      { image: "/img/products/fallout/3.png" },
+                      { image: "/img/products/fallout/4.png" },
+                    ]
+                  })}
+                />
+              </div>
+
+              <div className="pv-cgg-quarter-cell">
+                <PollCard
+                  poll={Immutable.fromJS({
+                    title: "Headphones; in or over ear?",
+                    author: "rachelmk",
+                    date: Date.now(),
+                    rewards: [
+                      { image: "/img/products/headphones/1.jpg" },
+                      { image: "/img/products/headphones/2.jpg" },
+                    ]
+                  })}
+                />
+
+                <PollCard
+                  poll={Immutable.fromJS({
+                    title: "Winter is coming",
+                    author: "bash",
+                    date: Date.now(),
+                    rewards: [
+                      { image: "/img/products/jackets/1.jpg" },
+                      { image: "/img/products/jackets/2.jpg" },
+                      { image: "/img/products/jackets/3.jpg" },
+                    ]
+                  })}
+                />
+              </div>
             </div>
+          </div>
+
+          <div className="pv-cb-load">
+            <button>Load More</button>
           </div>
         </section>
       </div>

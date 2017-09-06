@@ -10,7 +10,7 @@ const BottomBar = ({ currentLocation, navigate, links }) => {
 
   return (
     <nav id="pv-bottombar">
-      <div id="pv-b-wrapper">
+      <div className="pvc-content-wrapper" id="pv-b-wrapper">
         <p>&copy; Povo 2017</p>
 
         <ul>
