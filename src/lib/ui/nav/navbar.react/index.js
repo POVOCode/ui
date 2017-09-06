@@ -11,43 +11,45 @@ const NavBar = ({ logoRoute, logoPayload, currentLocation, navigate, links }) =>
 
   return (
     <nav id="pv-navbar">
-      <Logo
-        onClick={(e) => {
-          navigate(new Immutable.Map({
-            route: logoRoute || "p.home",
-          }));
-        }}
-      />
+      <div id="pv-n-wrapper">
+        <Logo
+          onClick={(e) => {
+            navigate(new Immutable.Map({
+              route: logoRoute || "p.home",
+            }));
+          }}
+        />
 
-      <ul>
-        {links.map(l =>
-          <li key={l.label || l.icon}>
-            <a
-              href={l.href}
+        <ul>
+          {links.map(l =>
+            <li key={l.label || l.icon}>
+              <a
+                href={l.href}
 
-              className={mergeClassNames({
-                bordered: l.bordered,
-              })}
+                className={mergeClassNames({
+                  bordered: l.bordered,
+                })}
 
-              onClick={l.onClick ? l.onClick : (e) => {
-                if (typeof l.loc === "undefined" || !l.loc) return;
+                onClick={l.onClick ? l.onClick : (e) => {
+                  if (typeof l.loc === "undefined" || !l.loc) return;
 
-                navigate(l.loc);
+                  navigate(l.loc);
 
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-              }}
-            >
-              {l.label || ""}
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return false;
+                }}
+              >
+                {l.label || ""}
 
-              {ternaryFunc(l.icon, () =>
-                <i className={`icon-${l.icon}`} />
-              )}
-            </a>
-          </li>
-        )}
-      </ul>
+                {ternaryFunc(l.icon, () =>
+                  <i className={`icon-${l.icon}`} />
+                )}
+              </a>
+            </li>
+          )}
+        </ul>
+      </div>
     </nav>
   );
 };

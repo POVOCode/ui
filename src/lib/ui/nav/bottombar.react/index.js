@@ -10,37 +10,39 @@ const BottomBar = ({ currentLocation, navigate, links }) => {
 
   return (
     <nav id="pv-bottombar">
-      <p>&copy; Povo 2017</p>
+      <div id="pv-b-wrapper">
+        <p>&copy; Povo 2017</p>
 
-      <ul>
-        {links.map(l =>
-          <li key={l.label || l.icon}>
-            <a
-              href={l.href}
+        <ul>
+          {links.map(l =>
+            <li key={l.label || l.icon}>
+              <a
+                href={l.href}
 
-              className={mergeClassNames({
-                bordered: l.bordered,
-              })}
+                className={mergeClassNames({
+                  bordered: l.bordered,
+                })}
 
-              onClick={l.onClick ? l.onClick : (e) => {
-                if (typeof l.loc === "undefined" || !l.loc) return;
+                onClick={l.onClick ? l.onClick : (e) => {
+                  if (typeof l.loc === "undefined" || !l.loc) return;
 
-                navigate(l.loc);
+                  navigate(l.loc);
 
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-              }}
-            >
-              {l.label || ""}
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return false;
+                }}
+              >
+                {l.label || ""}
 
-              {ternaryFunc(l.icon, () =>
-                <i className={`icon-${l.icon}`} />
-              )}
-            </a>
-          </li>
-        )}
-      </ul>
+                {ternaryFunc(l.icon, () =>
+                  <i className={`icon-${l.icon}`} />
+                )}
+              </a>
+            </li>
+          )}
+        </ul>
+      </div>
     </nav>
   );
 };

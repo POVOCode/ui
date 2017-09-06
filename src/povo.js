@@ -264,21 +264,9 @@ class POVO extends Routable {
     const loc = this.getCurrentLocation();
     const user = this.state.busState.getIn(["user", "active"]);
 
-    /*{
-      label: "Login",
-      href: "javascript:void(0)",
-      onClick: this.onLoginClick,
-    }, {
-      label: "Sign up",
-      href: "javascript:void(0)",
-      onClick: this.onSignupClick,
-    }*/
-
     const navLinks = [];
 
     if (user) {
-      console.log(user.toJS());
-
       navLinks.push({
         bordered: true,
         label: "Create Poll",
@@ -294,6 +282,12 @@ class POVO extends Routable {
         onClick: this.onLogout,
       });
     } else {
+      navLinks.push({
+        label: "Login",
+        href: "javascript:void(0)",
+        onClick: this.onLoginClick,
+      });
+
       navLinks.push({
         bordered: true,
         label: "Pre-Register",
@@ -321,12 +315,12 @@ class POVO extends Routable {
           links={navLinks}
         />
 
-        {/*<ModalToaster
+        <ModalToaster
           toast={Immutable.Map({
             message: "Get 40 points when you sign up",
             onClick: (() => {}), // To get the icon
           })}
-        />*/}
+        />
 
         {viewHTML}
 

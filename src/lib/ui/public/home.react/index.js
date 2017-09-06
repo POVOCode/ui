@@ -49,7 +49,7 @@ class HomeView extends React.Component {
       <div id="pv-home">
         <section id="pv-collection-browser">
           <div id="pv-cb-inner">
-            {/*<header>
+            <header>
               <ul>
                 <li>
                   <a href="#">Newest</a>
@@ -76,9 +76,7 @@ class HomeView extends React.Component {
                   label: "View all Polls",
                 }])}
               />
-            </header>*/}
-
-            <p id="pv-h-teaser-text">Povo is an online marketplace for users to share ideas and gain feedback from other users about the purchases they are making online. Users are rewarded upon creating, sharing and up-voting content to offer the ultimate online shopping experience.</p>
+            </header>
 
             <div className="pv-card-grid">
               <div className="pv-cg-column pv-cgc-two">
@@ -110,26 +108,6 @@ class HomeView extends React.Component {
                       ]
                     })}
                   />
-                </div>
-
-                <div className="pv-cgg-quarter-cell">
-                   <TextCard>
-                    <p>Some things users will be able to do include:</p>
-
-                    <ul>
-                      <li>
-                        <p>Create polls to gather feedback from the real world, and to identify winning products</p>
-                      </li>
-
-                      <li>
-                        <p>Vote &amp; comment on polls to help other users find the products that suite their needs best</p>
-                      </li>
-
-                      <li>
-                        <p>Purchase products via our platform for rewards including POVO points, free shipping, and exclusive discount opportunities</p>
-                      </li>
-                    </ul>
-                  </TextCard>
                 </div>
 
                 <div className="pv-cgg-quarter-cell">
@@ -209,9 +187,9 @@ class HomeView extends React.Component {
               </div>
             </div>
 
-            {/*<div className="pv-cb-load">
+            <div className="pv-cb-load">
               <button>Load More</button>
-            </div>*/}
+            </div>
           </div>
         </section>
       </div>
