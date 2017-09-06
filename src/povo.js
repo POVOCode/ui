@@ -69,6 +69,7 @@ class POVO extends Routable {
     this.onPreRegisterCloseClick = this.onPreRegisterCloseClick.bind(this);
     this.onPreRegisterCompletion = this.onPreRegisterCompletion.bind(this);
     this.onPreRegisterConfirmationCloseClick = this.onPreRegisterConfirmationCloseClick.bind(this);
+    this.onDevBarLocationChange = this.onDevBarLocationChange.bind(this);
   }
 
   componentDidMount() {
@@ -254,6 +255,10 @@ class POVO extends Routable {
       });
   }
 
+  onDevBarLocationChange(loc) {
+    this.navigate(loc);
+  }
+
   render() {
     const viewHTML = this.renderView();
     const loc = this.getCurrentLocation();
@@ -303,12 +308,11 @@ class POVO extends Routable {
           <div id="pv-screen-fader" />
         )}
 
-        {/* Disabled for now */}
-        {ternaryFunc(false, () =>
-          <DevInfoBar
-            currentLocation={loc}
-          />
-        )}
+        <DevInfoBar
+          currentLocation={loc}
+          routes={Object.keys(RouteTable)}
+          onLocationChange={this.onDevBarLocationChange}
+        />
 
         <NavBar
           navigate={this.navigate}

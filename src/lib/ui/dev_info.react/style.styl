@@ -1,9 +1,4 @@
 #pvc-dev-info-bar
-  z-index 9999999999
-  position fixed
-  bottom 0
-  left 0
-
   height 32px
   width 100%
   padding 8px 32px
@@ -15,8 +10,10 @@
 
   border-top 1px solid red
 
+  display flex
+  flex-direction row
+
   > *
-    display inline-block
     vertical-align middle
     margin-right 10px
 
@@ -34,3 +31,7 @@
     
     &.value
       margin-right 10px
+
+#pvc-dib-route
+  flex 1
+  text-align right
