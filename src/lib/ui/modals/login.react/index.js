@@ -20,8 +20,7 @@ class ModalLoginForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.initialState = {};
-    this.state = {
+    this.initialState = {
       dirty: false,
     };
 
@@ -30,10 +29,13 @@ class ModalLoginForm extends React.Component {
       { c: this, key: "password", val: "", cb: "onPasswordChange" },
     ]);
 
+    this.state = Object.assign({}, this.initialState);
+
     this.onCloseClick = this.onCloseClick.bind(this);
     this.onSubmitClick = this.onSubmitClick.bind(this);
     this.onLoginWithFBClick = this.onLoginWithFBClick.bind(this);
     this.onLoginWithGPClick = this.onLoginWithGPClick.bind(this);
+    this.onPasswordKeyPress = this.onPasswordKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -63,13 +65,23 @@ class ModalLoginForm extends React.Component {
   onLoginWithFBClick() {}
   onLoginWithGPClick() {}
 
+  onPasswordKeyPress(e) {
+    if (e.which === 13) {
+      this.onSubmitClick();
+
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+  }
+
   render() {
     return (
       <Modal onBlur={this.onCloseClick} innerID="pvc-modal-login">
         <CloseButton onClick={this.onCloseClick} />
         <Logo />
 
-        <div id="pvc-mlf-form">
+        <form id="pvc-mlf-form">
           <input
             type="text"
             placeholder="Email"
@@ -83,8 +95,9 @@ class ModalLoginForm extends React.Component {
             placeholder="Password"
             value={this.state.password}
             onChange={this.onPasswordChange}
+            onKeyPress={this.onPasswordKeyPress}
           />
-        </div>
+        </form>
 
         <button
           id="pvc-mlf-continue"

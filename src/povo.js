@@ -7,7 +7,8 @@ import Routable from "./lib/routable.react";
 import NavBar from "./lib/ui/nav/navbar.react";
 import ModalToaster from "./lib/ui/notifications/modal_toaster.react";
 import BottomBar from "./lib/ui/nav/bottombar.react";
-import DevInfoBar from "./lib/ui/dev_info.react";
+import DevBar from "./lib/ui/dev_info.react";
+import UserSidebar from "./lib/ui/user_sidebar.react";
 
 import HomeView from "./lib/ui/public/home.react";
 import UserProfileView from "./lib/ui/user/profile.react";
@@ -54,6 +55,7 @@ class POVO extends Routable {
     this.state.signupFormOpen = false;
     this.state.preRegisterFormOpen = false;
     this.state.preRegisterConfirmationOpen = false;
+    this.state.userSidebarVisible = false;
 
     this.onLogout = this.onLogout.bind(this);
     this.onBusUpdate = this.onBusUpdate.bind(this);
@@ -70,7 +72,12 @@ class POVO extends Routable {
     this.onPreRegisterCloseClick = this.onPreRegisterCloseClick.bind(this);
     this.onPreRegisterCompletion = this.onPreRegisterCompletion.bind(this);
     this.onPreRegisterConfirmationCloseClick = this.onPreRegisterConfirmationCloseClick.bind(this);
+
     this.onDevBarLocationChange = this.onDevBarLocationChange.bind(this);
+
+    this.onMenuIconClick = this.onMenuIconClick.bind(this);
+    this.onCloseUserSidebar = this.onCloseUserSidebar.bind(this);
+    this.onUserSidebarNavigate = this.onUserSidebarNavigate.bind(this);
   }
 
   componentDidMount() {
@@ -173,9 +180,10 @@ class POVO extends Routable {
       this.setState(() => ({
         fadeScreen: false,
         lastError: null,
+        loginFormOpen: false,
       }));
 
-      this.props.navigate(Immutable.Map({
+      this.navigate(Immutable.fromJS({
         route: "u.polls"
       }));
     }).catch((e) => {
@@ -252,12 +260,35 @@ class POVO extends Routable {
 
         this.setState(() => ({
           fadeScreen: false,
+          userSidebarVisible: false,
         }));
       });
   }
 
   onDevBarLocationChange(loc) {
     this.navigate(loc);
+  }
+
+  onMenuIconClick() {
+    const { userSidebarVisible } = this.state;
+
+    this.setState(() => ({
+      userSidebarVisible: !userSidebarVisible,
+    }));
+  }
+
+  onCloseUserSidebar() {
+    this.setState(() => ({
+      userSidebarVisible: false,
+    }));
+  }
+
+  onUserSidebarNavigate(loc) {
+    this.navigate(loc);
+
+    this.setState(() => ({
+      userSidebarVisible: false,
+    }));
   }
 
   render() {
@@ -278,9 +309,17 @@ class POVO extends Routable {
       });
 
       navLinks.push({
-        icon: "logout",
+        label: "My Account",
         href: "javascript:void(0)",
-        onClick: this.onLogout,
+        loc: Immutable.fromJS({
+          route: "u.profile",
+        }),
+      });
+
+      navLinks.push({
+        icon: "menu",
+        href: "javascript:void(0)",
+        onClick: this.onMenuIconClick,
       });
     } else {
       navLinks.push({
@@ -303,7 +342,7 @@ class POVO extends Routable {
           <div id="pv-screen-fader" />
         )}
 
-        <DevInfoBar
+        <DevBar
           currentLocation={loc}
           routes={Object.keys(RouteTable)}
           onLocationChange={this.onDevBarLocationChange}
@@ -342,6 +381,37 @@ class POVO extends Routable {
             href: "#",
           }]}
         />
+
+        {ternaryFunc(this.state.userSidebarVisible, () =>
+          <UserSidebar
+            currentLocation={loc}
+            navigate={this.onUserSidebarNavigate}
+            onClose={this.onCloseUserSidebar}
+            links={[{
+              route: "p.home",
+              icon: "icon-home",
+              label: "Home",
+              last: true,
+            }, {
+              route: "u.profile",
+              icon: "icon-user",
+              label: "My Account",
+            }, {
+              route: "u.polls",
+              icon: "icon-chart-bar",
+              label: "My Polls",
+            }, {
+              route: "u.rewards",
+              icon: "icon-gift",
+              label: "Rewards",
+              last: true,
+            }, {
+              icon: "icon-logout",
+              label: "Logout",
+              onClick: this.onLogout,
+            }]}
+          />
+        )}
 
         {ternaryFunc(this.state.loginFormOpen, () =>
           <ModalLoginForm
