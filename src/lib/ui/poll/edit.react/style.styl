@@ -1,102 +1,31 @@
 #pv-pe-products
+  padding-top 62px
+  padding-bottom 62px
+
   width calc(75% - 2rem)
 
   header
-    > div:first-child
-      display flex
-      flex-direction row
-
+    > p:first-child
+      font-size 14px
+      font-weight bold
+      color #666
       margin-bottom 16px
 
-      > p:first-child
-        font-weight bold
-
-        width 100%
-        flex 1
-    
-    select
       width 100%
+      flex 1
+    
+    input[type=search]
+      width 100%
+      height 36px
+      padding 0 18px
 
-      line-height 32px
-      font-size 18px
+      line-height 36px
+      font-size 14px
+      font-weight 600
 
-      border none
+      border 1px solid #d6d6d6
+      background #fff
+
       border-radius 4px
-      background #ebebeb
-      color #525252
-
-      padding 13px 17px
-
-.pvc-product-card-small
-  display inline-block
-
-  width calc(25% - 15px)
-  height 220px
-
-  background #999
-  border-radius 8px
-
-  margin-right 20px
-  margin-bottom 20px
-
-  &:nth-child(4n)
-    margin-right 0
-
-#pc-form-bottombar
-  width 100%
-  height 100px
-
-  position fixed
-  bottom 0
-  right 0
-
-  background #fff
-  box-shadow 0 -1px 0 1px rgba(0, 0, 0, 0.2)
-
-  padding 0 32px
-
-  ul
-    display flex
-    flex-direction row
-
-    li
-      width 256px
-
-      a
-        display block
-        font-size 16px
-
-      > *
-        height 45px
-        line-height 45px
-        margin 25px 0
-
-      &:first-child
-        width 100%
-        text-align right
-
-        margin-right 24px
-      
-      button
-        width 100%
-        border-radius 32px
-
-        background #303030
-        color #fff
-
-        font-weight bold
-
-        display flex
-        flex-direction row
-
-        > *
-          line-height 42px
-          font-size 18px
-
-        > span:first-child
-          width 100%
-          text-align left
-          margin-left 32px
-        
-        .pt-icon-standard
-          margin-right 24px
+      color #000
+      text-align center

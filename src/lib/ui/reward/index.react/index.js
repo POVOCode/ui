@@ -24,7 +24,7 @@ class RewardIndexView extends React.Component {
     return (
       <SidebarView id="pv-rewards">
         <SidebarWrapper>
-          <span className="pvc-sw-icon">Icon</span>
+          <i className="icon-chart-bar" />
 
           <h1>Rewards</h1>
 

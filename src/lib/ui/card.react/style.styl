@@ -1,0 +1,124 @@
+@import "../../style/colors.styl"
+
+.pvc-card
+  display flex
+  flex-direction column
+  overflow hidden
+  position relative
+
+  border-radius 8px
+  box-shadow 0 1px 0px 1px rgba(0, 0, 0, 0.1)
+
+  h3, h5
+    padding 17px 19px 0 19px
+    color $pv_dark_blue  
+    font-weight normal
+    margin-bottom 5px
+    line-height 1.3
+  
+  &.large h3, &.large h5
+    padding 34px 47px 0 47px
+  
+  h3
+    font-size 28px
+  
+  h5
+    font-size 16px
+
+    width 100%
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+
+  article
+    background #fafeff
+    padding 0 19px 17px 19px
+
+    display flex
+    flex-direction column
+
+    &.with-button
+      flex-direction row
+
+    .info-wrapper, &
+      > h3
+        width 100%
+        font-size 16px
+        margin 14px 0 2px 0
+        padding 0
+
+        & + cite
+          font-size 14px
+          font-style normal
+          color #989c9d
+
+      > h3 + div
+        width 60%
+      
+      > h5 + div
+        width 100%
+
+    button
+      margin 0 auto
+      padding 13px 67px
+      text-align center
+      color #fff
+      background $pv_primary_color
+      border none
+      border-radius 20px
+      font-weight bold
+      font-size 15px
+    
+    .button-wrap
+      text-align right
+  
+  .pvc-rc-icon
+    position absolute
+    top 5px
+    left 5px
+
+    z-index 9999999
+
+    font-size 24px
+    color #fff
+
+  &.hoverable
+    margin-top 2px
+    margin-left 2px
+
+    i.icon-info-circled
+      display none
+
+    i.icon-info-circled-alt
+      display block
+
+    &:hover
+      cursor pointer
+      border 2px solid $pv_primary_color
+
+      margin-top 0
+      margin-left 0
+
+      i.icon-info-circled
+        display block
+
+      i.icon-info-circled-alt
+        display none
+      
+      .pvc-rc-info-icon
+        color $pv_primary_color
+
+  img
+    max-width 100%
+    max-height 235px
+  
+  .img-wrapper
+    height 235px
+    width 100%
+
+  &.small
+    img
+      max-height 150px
+    
+    .img-wrapper
+      height 150px

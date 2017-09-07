@@ -7,7 +7,7 @@ import "./style.styl";
 const SidebarView = (props) => {
   return (
     <div
-      className={`pvc-sidebar-view ${props.className || ""}`}
+      className={`pvc-sidebar-view pvc-content-wrapper ${props.className || ""}`}
       {...props}
     >
       {props.children}

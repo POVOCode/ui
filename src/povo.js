@@ -30,9 +30,14 @@ import "./lib/ui/css_components/fake_logo.styl";
 import "./lib/ui/css_components/li_active_marker.styl";
 import "./lib/ui/css_components/screen_fader.styl";
 import "./lib/ui/css_components/content_wrapper.styl";
+import "./lib/ui/css_components/button.styl";
 
 const RouteTable = {
-  "p.home": HomeView,
+  "p.home": {
+    view: HomeView,
+    bottombar: true,
+  },
+
   "u.profile": UserProfileView,
 
   "u.poll": PollView,
@@ -235,7 +240,13 @@ class POVO extends Routable {
   }
 
   getViewForLocation(loc) {
-    return RouteTable[loc.get("route")];
+    const v = RouteTable[loc.get("route")];
+
+    if (typeof v === "object" && v.view) {
+      return v.view;
+    } else {
+      return v;
+    }
   }
 
   getViewProps(loc) {
@@ -294,9 +305,11 @@ class POVO extends Routable {
   render() {
     const viewHTML = this.renderView();
     const loc = this.getCurrentLocation();
+    const viewConfig = RouteTable[loc.get("route")];
     const user = this.state.busState.getIn(["user", "active"]);
-
     const navLinks = [];
+
+    const { bottombar } = viewConfig;
 
     if (user) {
       navLinks.push({
@@ -355,32 +368,36 @@ class POVO extends Routable {
           links={navLinks}
         />
 
-        <ModalToaster
-          toast={Immutable.Map({
-            message: "Get 40 points when you sign up",
-            onClick: (() => {}), // To get the icon
-          })}
-        />
+        {/*
+          <ModalToaster
+            toast={Immutable.Map({
+              message: "Get 40 points when you sign up",
+              onClick: (() => {}), // To get the icon
+            })}
+          />
+        */}
 
         {viewHTML}
 
-        <BottomBar
-          navigate={this.navigate}
-          currentLocation={loc}
-          links={[{
-            label: "About",
-            href: "#",
-          }, {
-            label: "FAQ",
-            href: "#",
-          }, {
-            label: "Contact",
-            href: "#",
-          }, {
-            label: "Partner",
-            href: "#",
-          }]}
-        />
+        {ternaryFunc(bottombar, () =>
+          <BottomBar
+            navigate={this.navigate}
+            currentLocation={loc}
+            links={[{
+              label: "About",
+              href: "#",
+            }, {
+              label: "FAQ",
+              href: "#",
+            }, {
+              label: "Contact",
+              href: "#",
+            }, {
+              label: "Partner",
+              href: "#",
+            }]}
+          />
+        )}
 
         {ternaryFunc(this.state.userSidebarVisible, () =>
           <UserSidebar

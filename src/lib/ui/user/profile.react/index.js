@@ -100,8 +100,8 @@ class UserProfileView extends React.Component {
 
           <article>
             <ul>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() =>
-                <li className="pvc-won-product-card">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) =>
+                <li className="pvc-won-product-card" key={i}>
                   <div className="pvc-wpc-header">
                     <p>2 June</p>
                     <a

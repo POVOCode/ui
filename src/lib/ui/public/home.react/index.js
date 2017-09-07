@@ -6,6 +6,11 @@ import Dropdown from "../../dropdown.react";
 import PollCard from "../../poll/card.react";
 import TextCard from "../../poll/text_card.react";
 
+import CardGrid from "../../card_grid.react";
+import CardGridColumn from "../../card_grid.react/column.react";
+import CardGridHalfCell from "../../card_grid.react/half_cell.react";
+import CardGridModalCell from "../../card_grid.react/modal_cell.react";
+
 import { ternaryFunc } from "../../../util/methods";
 import "./style.styl";
 
@@ -77,9 +82,9 @@ class HomeView extends React.Component {
             />
           </header>
 
-          <div className="pv-card-grid">
-            <div className="pv-cg-column pv-cgc-two">
-              <div className="pv-cgg-quarter-cell">
+          <CardGrid>
+            <CardGridColumn width={2}>
+              <CardGridHalfCell>
                 <PollCard
                   poll={Immutable.fromJS({
                     title: "Best keyboard of 2017?",
@@ -107,9 +112,9 @@ class HomeView extends React.Component {
                     ]
                   })}
                 />
-              </div>
+              </CardGridHalfCell>
 
-              <div className="pv-cgg-quarter-cell">
+              <CardGridHalfCell>
                 <PollCard
                   poll={Immutable.fromJS({
                     title: "Which sofa for a studio flat?",
@@ -135,11 +140,11 @@ class HomeView extends React.Component {
                     ]
                   })}
                 />
-              </div>
-            </div>
+              </CardGridHalfCell>
+            </CardGridColumn>
 
-            <div className="pv-cg-column pv-cgc-two">
-              <div className="pv-cgg-modal-cell">
+            <CardGridColumn width={2}>
+              <CardGridModalCell>
                 <PollCard
                   large={true}
                   poll={Immutable.fromJS({
@@ -155,9 +160,9 @@ class HomeView extends React.Component {
                     ]
                   })}
                 />
-              </div>
+              </CardGridModalCell>
 
-              <div className="pv-cgg-quarter-cell">
+              <CardGridHalfCell>
                 <PollCard
                   poll={Immutable.fromJS({
                     title: "Headphones; in or over ear?",
@@ -182,9 +187,9 @@ class HomeView extends React.Component {
                     ]
                   })}
                 />
-              </div>
-            </div>
-          </div>
+              </CardGridHalfCell>
+            </CardGridColumn>
+          </CardGrid>
 
           <div className="pv-cb-load">
             <button>Load More</button>

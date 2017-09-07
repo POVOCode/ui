@@ -1,29 +1,32 @@
+@require "../../style/colors"
+
 .pvc-sidebar-wrapper
   width calc(25% - 2rem)
+  min-width 340px
+
   margin-right 4rem
 
   display flex
   flex-direction column
 
-  // Icon
-  .pvc-sw-icon
-    height 30px
-    line-height 30px  
-
+  > i
     margin-bottom 20px
     font-size 20px
 
-    color #999
+    color $pv_primary_color
 
   > input
     height 32px
     line-height 32px
-    font-size 24px
+    font-size 18px
+    font-weight 600
 
     border none
-    border-bottom 1px dashed #333
+    border-bottom 1px dotted #ccc
 
-    margin-bottom 40px
+    margin-bottom 20px
+
+    background transparent
   
   > textarea
     border none

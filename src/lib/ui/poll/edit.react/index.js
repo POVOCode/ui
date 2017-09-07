@@ -5,6 +5,9 @@ import Immutable from "immutable";
 import SidebarView from "../../sidebar_view.react";
 import SidebarWrapper from "../../sidebar_wrapper.react";
 import SidebarContentWrapper from "../../sidebar_content_wrapper.react";
+import PollBottomBar from "../bottombar.react";
+import RewardCard from "../../reward/card.react";
+import CardGrid from "../../card_grid.react";
 
 import Dropdown from "../../dropdown.react";
 
@@ -28,14 +31,22 @@ class PollEditView extends React.Component {
 
   render() {
     const { title } = this.state;
+    const testReward = {
+      label: "Reward A",
+      brand: "Brand A",
+      image_url: "http://loremflickr.com/640/480",
+    };
 
-    /**
-     * TODO: external LabelledDropdown
-     */
+    const rewards = [];
+
+    for (let i = 0; i < 20; i += 1) {
+      rewards.push(testReward);
+    }
+
     return (
-      <SidebarView>
+      <SidebarView id="pv-poll-edit">
         <SidebarWrapper>
-          <span className="pvc-sw-icon">Icon</span>
+          <i className="icon-chart-bar" />
 
           <input
             type="text"
@@ -54,50 +65,39 @@ class PollEditView extends React.Component {
 
         <SidebarContentWrapper id="pv-pe-products">
           <header>
-            <div>
-              <p>Select Product(s)</p>
-              <span>4 / 4</span>
-            </div>
+            <p>Select Product(s)</p>
 
-            <select value="d">
-              <option value="d">Search for products</option>
-            </select>
+            <input
+              type="search"
+              placeholder="Search for products"
+            />
           </header>
 
-          <article>
-            <ul>
-              <li className="pvc-product-card-small" />
-              <li className="pvc-product-card-small selected" />
-              <li className="pvc-product-card-small" />
-              <li className="pvc-product-card-small" />
-              <li className="pvc-product-card-small selected" />
-              <li className="pvc-product-card-small" />
-              <li className="pvc-product-card-small" />
-              <li className="pvc-product-card-small selected" />
-              <li className="pvc-product-card-small selected" />
-              <li className="pvc-product-card-small" />
-              <li className="pvc-product-card-small" />
-              <li className="pvc-product-card-small" />
-            </ul>
-          </article>
+          <CardGrid
+            itemsPerRow={4}
+            items={rewards}
+            renderItem={(r) =>
+              <RewardCard
+                reward={r}
+                small={true}
+                hoverable={true}
+                onSelectClick={true}
+              />
+            }
+          />
         </SidebarContentWrapper>
 
-        <div id="pc-form-bottombar">
-          <ul>
-            <li>
-              <a
-                href="#"
-              >Cancel</a>
-            </li>
-            
-            <li>
-              <button>
-                <span>Finish</span>
-                <span className="pt-icon-standard pt-icon-arrow-right" />
-              </button>
-            </li>
-          </ul>
-        </div>
+        <PollBottomBar
+          steps={["Create Poll", "Preview", "Publish"]}
+          activeStep={0}
+
+          buttons={[{
+            label: "Cancel",
+          }, {
+            label: "Preview",
+            className: "pvc-button-primary",
+          }]}
+        />
       </SidebarView>
     );
   }
