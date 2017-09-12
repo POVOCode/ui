@@ -18,6 +18,7 @@ import PollEditView from "./lib/ui/poll/edit.react";
 import PollResultsView from "./lib/ui/poll/results.react";
 import RewardView from "./lib/ui/reward/view.react";
 import RewardIndexView from "./lib/ui/reward/index.react";
+import AdminUserView from "./lib/ui/admin/users.react";
 
 import ModalLoginForm from "./lib/ui/modals/login.react";
 import ModalSignupForm from "./lib/ui/modals/signup.react";
@@ -47,6 +48,8 @@ const RouteTable = {
 
   "u.reward": RewardView,
   "u.rewards": RewardIndexView,
+
+  "a.users": AdminUserView,
 };
 
 class POVO extends Routable {
