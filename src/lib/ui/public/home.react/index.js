@@ -11,7 +11,7 @@ import CardGridColumn from "../../card_grid.react/column.react";
 import CardGridHalfCell from "../../card_grid.react/half_cell.react";
 import CardGridModalCell from "../../card_grid.react/modal_cell.react";
 
-import { ternaryFunc } from "../../../util/methods";
+import { mergeClassNames, ternaryFunc } from "../../../util/methods";
 import "./style.styl";
 
 const genRewardImage = () => {
@@ -228,7 +228,11 @@ class HomeView extends React.Component {
           </CardGrid>
 
           <div className="pv-cb-load">
-            <button disabled={true}>Load More</button>
+            <button
+              className={mergeClassNames({
+                disabled: false,
+              })}
+            >Load More</button>
           </div>
         </section>
       </div>
