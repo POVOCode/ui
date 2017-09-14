@@ -39,23 +39,25 @@ const PollCard = ({ large, poll, onVoteClick }) => {
       <article>
         {large ? (<h3>{title}</h3>) : (<h5>{title}</h5>)}
 
-        <div className="pvc-pclw-info">
-          {ternaryFunc(large, () =>
-            <p className="pv-pclwi-teaser">{poll.get("teaser")}</p>
-          )}
+        <div>
+          <div className="pvc-pclw-info">
+            {ternaryFunc(large, () =>
+              <p className="pv-pclwi-teaser">{poll.get("teaser")}</p>
+            )}
 
-          <p className="pvc-pclwi-byline">
-            {`By ${poll.get("author")} \u2022 ${new Date(poll.get("date")).toLocaleDateString()}`}
-          </p>
-        </div>
-
-        {ternaryFunc(large, () =>
-          <div className="button-wrap">
-            <button
-              onClick={onVoteClick}
-            >Vote</button>
+            <p className="pvc-pclwi-byline">
+              {`By ${poll.get("author")} \u2022 ${new Date(poll.get("date")).toLocaleDateString()}`}
+            </p>
           </div>
-        )}
+
+          {ternaryFunc(large, () =>
+            <div className="button-wrap">
+              <button
+                onClick={onVoteClick}
+              >Vote</button>
+            </div>
+          )}
+        </div>
       </article>
     </Card>
   );

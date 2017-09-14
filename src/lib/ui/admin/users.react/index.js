@@ -17,6 +17,7 @@ class AdminUserView extends React.Component {
     this.initialState = {
       dirty: false,
       selectedUser: null,
+      isNewUser: false,
       initialSelectedUser: null,
     };
 
@@ -29,7 +30,8 @@ class AdminUserView extends React.Component {
 
     this.onResetSelectedUser = this.onResetSelectedUser.bind(this);
     this.onClearSelectedUser = this.onClearSelectedUser.bind(this);
-    this.onSaveSelectedUser = this.onSaveSelectedUser.bind(this);
+    this.onSubmitSidebar = this.onSubmitSidebar.bind(this);
+    this.onCreateNewUser = this.onCreateNewUser.bind(this);
 
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
@@ -102,6 +104,7 @@ class AdminUserView extends React.Component {
     this.setState(() => ({
       selectedUser,
       initialSelectedUser: selectedUser,
+      isNewUser: false,
       dirty: false,
     }));
   }
@@ -116,18 +119,65 @@ class AdminUserView extends React.Component {
   onClearSelectedUser() {
     this.setState(() => ({
       selectedUser: null,
+      isNewUser: false,
       dirty: false,
     }));
   }
 
-  onSaveSelectedUser() {
-    alert("unimplemented");
+  onSubmitSidebar() {
+    if (this.isNewUser) {
+      return alert("User creation unimplemented");
+    }
+
+    this.props.actions.user
+      .update(Immutable.Map(this.stateToUserDataPayload()))
+      .then(this.props.onClearSelectedUser);
+  }
+
+  stateToUserDataPayload() {
+    const { selectedUser } = this.state;
+
+    if (!selectedUser) return {};
+
+    return {
+      username: selectedUser.get("username"),
+      email: selectedUser.get("email"),
+      interests: selectedUser.get("interests"),
+      postcode: selectedUser.get("postcode"),
+
+      password: this.state.password,
+      verifyPassword: this.state.confirmPassword, // TODO: UI/API key mismatch
+      currentPassword: "",
+    };
+  }
+
+  onCreateNewUser() {
+    const user = this.genNewUser();
+
+    this.setState(() => ({
+      selectedUser: user,
+      initialSelectedUser: user,
+      isNewUser: true,
+      password: "",
+      confirmPassword: "",
+    }));
+  }
+
+  genNewUser() {
+    return Immutable.fromJS({
+      id: "",
+      email: "",
+      username: "",
+      admin: false,
+      postcode: "",
+      interests: "",
+    });
   }
 
   render() {
     const busState = this.props.state;
     const users = busState.get("user");
-    const usersJS = users.toJS();
+    const usersJS = users ? users.toJS() : {};
     const { selectedUser } = this.state;
 
     delete usersJS.active;
@@ -135,9 +185,17 @@ class AdminUserView extends React.Component {
     return (
       <SidebarView id="pvc-admin-user-view">
         <SidebarWrapper>
+          {ternaryFunc(!selectedUser, () =>
+            <div className="pvc-admin-sidebar-empty-filler">
+              <p>No user selected</p>
+            </div>
+          )}
+
           {ternaryFunc(selectedUser, () =>
             <div>
-              <h3 className="pvc-admin-sidebar-header">Edit User</h3>
+              <h3 className="pvc-admin-sidebar-header">
+                {this.state.isNewUser ? "Create User" : "Edit User"}
+              </h3>
 
               <div className="pvc-admin-sidebar-control">
                 <label>ID</label>
@@ -231,9 +289,9 @@ class AdminUserView extends React.Component {
                 <div>
                   <button
                     className="pvc-btn-save"
-                    onClick={this.onSaveSelectedUser}
+                    onClick={this.onSubmitSidebar}
                     disabled={!this.state.dirty}
-                  >Save</button>
+                  >{this.state.isNewUser ? "Create" : "Save"}</button>
                 </div>
               </div>
             </div>
@@ -273,6 +331,11 @@ class AdminUserView extends React.Component {
               )}
             </tbody>
           </table>
+
+          <button
+            className="pvc-btn-save"
+            onClick={this.onCreateNewUser}
+          >Create User</button>
         </SidebarContentWrapper>
       </SidebarView>
     );

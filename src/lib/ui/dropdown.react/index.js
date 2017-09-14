@@ -35,17 +35,41 @@ class Dropdown extends React.Component {
     }));
   }
 
+  onOptionClick(o, e) {
+    const { onChange } = this.props;
+
+    this.setState(() => ({
+      expanded: false,
+    }));
+
+    if (onChange) {
+      onChange(o.get("value"));
+    }
+  }
+
   render() {
     const { expanded } = this.state;
     const { value, placeholder, options, onChange } = this.props;
 
+    let label = placeholder || "Select an option";
+
+    if (value && options) {
+      const selection = options.find(o => value === o.get("value"));
+
+      if (selection) {
+        label = selection.get("label");
+      }
+    }
+
     return (
       <div className="pv-dropdown">
         <div
-          className="pv-dd-label"
           onClick={this.onLabelClick}
+          className={mergeClassNames("pv-dd-label", {
+            expanded,
+          })}
         >
-          {value ? value.get("label") : ("Select an option" || placeholder)}
+          {label}
 
           <span className="pt-icon-standard pt-icon-chevron-down" />
         </div>
@@ -55,10 +79,10 @@ class Dropdown extends React.Component {
             {options.map(o =>
               <li
                 key={o.get("value")}
-                onClick={!onChange ? null : () => onChange(o)}
+                onClick={this.onOptionClick.bind(this, o)}
 
                 className={mergeClassNames({
-                  selected: o.get("value") === value.get("value"),
+                  selected: o.get("value") === value,
                 })}
 
               >{o.get("label")}</li>

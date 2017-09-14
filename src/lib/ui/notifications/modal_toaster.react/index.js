@@ -9,15 +9,15 @@ const ModalToaster = ({ toast }) => {
   return (
     <div id="pv-modal-toaster">
       {ternaryFunc(toast, () =>
-        <div
-          id="pv-modal-toast"
-          onClick={toast.get("onClick")}
-        >
+        <div id="pv-modal-toast">
           <div>
-            <p>{toast.get("message")}</p>
+            <p onClick={toast.get("onClick")}>{toast.get("message")}</p>
 
             {ternaryFunc(toast.get("onClick"), () =>
-              <span className="pt-icon-standard pt-icon-chevron-right" />
+              <span
+                className="pt-icon-standard pt-icon-chevron-right"
+                onClick={toast.get("onClick")}
+              />
             )}
           </div>
 

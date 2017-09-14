@@ -18,6 +18,27 @@ const PollActions = (bus) => {
         p: PollAPI.getAll(),
       });
     },
+
+    create(data) {
+      return pollChainGen({
+        type: "single",
+        p: PollAPI.create(data),
+      });
+    },
+
+    update(data) {
+      return pollChainGen({
+        type: "single",
+        p: PollAPI.update(data),
+      });
+    },
+
+    delete(data) {
+      return pollChainGen({
+        type: "delete",
+        p: PollAPI.delete(data),
+      });
+    },
   };
 
 };

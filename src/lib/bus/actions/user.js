@@ -37,12 +37,15 @@ const UserActions = (bus) => {
      */
     update(data) {
       const {
-        username, email, password, verifyPassword, currentPassword
+        username, email, interests, postcode, password, verifyPassword,
+        currentPassword,
       } = data;
 
       return UserAPI.updateUser({
         username,
         email,
+        interests,
+        postcode,
         password,
         verifyPassword,
         currentPassword,

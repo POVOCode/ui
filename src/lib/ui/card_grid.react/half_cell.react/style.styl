@@ -3,10 +3,11 @@
   flex-direction row
   flex-wrap wrap
 
-  width calc((100% - 19px) * 0.5)
+  > *
+    width calc((100% - 19px) * 0.5)
 
-  &:nth-child(odd)
-    margin-right 17px
+    &:first-child
+      margin-right 17px
 
-  &:last-child
-    margin-right 0
+    &:last-child
+      margin-right 0

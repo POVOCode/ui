@@ -18,6 +18,28 @@ const RewardActions = (bus) => {
         p: RewardAPI.getAll(),
       });
     },
+
+    create(data) {
+      return rewardChainGen({
+        type: "single",
+        p: RewardAPI.create(data),
+      });
+    },
+
+    update(data) {
+      return rewardChainGen({
+        type: "single",
+        p: RewardAPI.update(data),
+      });
+    },
+
+    delete(data) {
+      return rewardChainGen({
+        type: "delete",
+        p: RewardAPI.delete(data),
+      });
+    },
+
   };
 
 };

@@ -9,7 +9,8 @@
 
     li
       background-repeat no-repeat
-      background-size cover
+      background-size 50%
+      background-color #fff
       background-position center
 
     &.single li
@@ -17,9 +18,19 @@
       height 160px
     
     &.quarters li
-      height 80px
-      width 50%
-    
+      height 74px
+      width 160px
+
+      &:first-child
+        border-right 1px solid #f4f4f4
+        border-bottom 1px solid #f4f4f4
+
+      &:nth-child(2)
+        border-bottom 1px solid #f4f4f4
+
+      &:nth-child(3)
+        border-right 1px solid #f4f4f4
+  
     &.halves li
       height 160px
       width 50%
@@ -36,15 +47,58 @@
           height 160px
           float right
 
-  &.large .pvc-pc-reward-images
-    &.single li
-      height 300px
+        &:first-child
+          border-right 1px solid #f4f4f4
+          border-bottom 1px solid #f4f4f4
+
+        &:nth-child(2)
+          border-right 1px solid #f4f4f4
+
+  &.large
+    article
+      padding 15px 45px 30px 45px
+
+      h3
+        font-size 24px
+
+        & + div
+          width 100%
+          display flex
+          flex-direction row
+
+          .button-wrap
+            flex 1
+
+    .pvc-pc-reward-images
+      &.single li
+        height 300px
+      
+      &.quarters li
+        height 170px
+        width 50%
     
-    &.quarters li
-      height 143px
+      &.halves li
+        height 285px
+  
+  article
+    border-top 1px solid #f4f4f4  
+    padding-top 15px
+
+    h5, h3
+      padding 0 !important
+
+    .pvc-pclw-info
+      margin-top 5px
+
+    .pv-pclwi-teaser
+      font-size 14px
+      color #444
+      font-weight 600
+      margin-bottom 15px
     
-    &.halves li
-      height 285px
+    .pvc-pclwi-byline
+      color #999d9e
+      font-size 14px
 
 .pvc-pc-lower-wrapper
   .pvc-pclwi-teaser
@@ -74,3 +128,6 @@
     display flex
     flex-direction column
     justify-content center
+
+.pvc-cg-half-cell .pvc-poll-card
+  width 320px

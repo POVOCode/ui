@@ -19,6 +19,7 @@ import PollResultsView from "./lib/ui/poll/results.react";
 import RewardView from "./lib/ui/reward/view.react";
 import RewardIndexView from "./lib/ui/reward/index.react";
 import AdminUserView from "./lib/ui/admin/users.react";
+import AdminRewardView from "./lib/ui/admin/rewards.react";
 
 import ModalLoginForm from "./lib/ui/modals/login.react";
 import ModalSignupForm from "./lib/ui/modals/signup.react";
@@ -32,6 +33,7 @@ import "./lib/ui/css_components/li_active_marker.styl";
 import "./lib/ui/css_components/screen_fader.styl";
 import "./lib/ui/css_components/content_wrapper.styl";
 import "./lib/ui/css_components/button.styl";
+import "./lib/ui/css_components/admin.styl";
 
 const RouteTable = {
   "p.home": {
@@ -50,6 +52,7 @@ const RouteTable = {
   "u.rewards": RewardIndexView,
 
   "a.users": AdminUserView,
+  "a.rewards": AdminRewardView,
 };
 
 class POVO extends Routable {
@@ -64,6 +67,7 @@ class POVO extends Routable {
     this.state.preRegisterFormOpen = false;
     this.state.preRegisterConfirmationOpen = false;
     this.state.userSidebarVisible = false;
+    this.state.welcomeToastDismissed = false;
 
     this.onLogout = this.onLogout.bind(this);
     this.onBusUpdate = this.onBusUpdate.bind(this);
@@ -82,6 +86,7 @@ class POVO extends Routable {
     this.onPreRegisterConfirmationCloseClick = this.onPreRegisterConfirmationCloseClick.bind(this);
 
     this.onDevBarLocationChange = this.onDevBarLocationChange.bind(this);
+    this.onDismissWelcomeToast = this.onDismissWelcomeToast.bind(this);
 
     this.onMenuIconClick = this.onMenuIconClick.bind(this);
     this.onCloseUserSidebar = this.onCloseUserSidebar.bind(this);
@@ -305,6 +310,12 @@ class POVO extends Routable {
     }));
   }
 
+  onDismissWelcomeToast() {
+    this.setState(() => ({
+      welcomeToastDismissed: true,
+    }));
+  }
+
   render() {
     const viewHTML = this.renderView();
     const loc = this.getCurrentLocation();
@@ -312,7 +323,15 @@ class POVO extends Routable {
     const user = this.state.busState.getIn(["user", "active"]);
     const navLinks = [];
 
-    const { bottombar } = viewConfig;
+    if (!viewConfig) {
+      this.navigate(Immutable.fromJS({
+        route: "p.home",
+      }));
+
+      return null;
+    }
+
+    const { bottombar } = viewConfig || {};
 
     if (user) {
       navLinks.push({
@@ -358,11 +377,13 @@ class POVO extends Routable {
           <div id="pv-screen-fader" />
         )}
 
-        <DevBar
-          currentLocation={loc}
-          routes={Object.keys(RouteTable)}
-          onLocationChange={this.onDevBarLocationChange}
-        />
+        {ternaryFunc(user && user.get("admin"), () =>
+          <DevBar
+            currentLocation={loc}
+            routes={Object.keys(RouteTable)}
+            onLocationChange={this.onDevBarLocationChange}
+          />
+        )}
 
         <NavBar
           navigate={this.navigate}
@@ -371,14 +392,15 @@ class POVO extends Routable {
           links={navLinks}
         />
 
-        {/*
+        {ternaryFunc(!user && !this.state.welcomeToastDismissed, () =>
           <ModalToaster
             toast={Immutable.Map({
-              message: "Get 40 points when you sign up",
-              onClick: (() => {}), // To get the icon
+              message: "Get 40 points when you sign up!",
+              onClick: this.onLoginClick,
+              onClose: this.onDismissWelcomeToast,
             })}
           />
-        */}
+        )}
 
         {viewHTML}
 

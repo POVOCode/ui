@@ -40,7 +40,19 @@ class HomeView extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      browserMode: "view_all",
+    };
+
+    this.onChangeBrowserMode = this.onChangeBrowserMode.bind(this);
+  }
+
+  onChangeBrowserMode(browserMode) {
+    if (this.state.browserMode === browserMode) return;
+
+    this.setState(() => ({
+      browserMode,
+    }))
   }
 
   /**
@@ -70,11 +82,8 @@ class HomeView extends React.Component {
             </ul>
 
             <Dropdown
-              value={Immutable.Map({
-                value: "view_all",
-                label: "View all Polls",
-              })}
-
+              value={this.state.browserMode}
+              onChange={this.onChangeBrowserMode}
               options={Immutable.fromJS([{
                 value: "view_all",
                 label: "View all Polls",
@@ -141,6 +150,33 @@ class HomeView extends React.Component {
                   })}
                 />
               </CardGridHalfCell>
+
+              <CardGridHalfCell>
+                <PollCard
+                  poll={Immutable.fromJS({
+                    title: "Headphones; in or over ear?",
+                    author: "rachelmk",
+                    date: Date.now(),
+                    rewards: [
+                      { image: "/img/products/headphones/1.jpg" },
+                      { image: "/img/products/headphones/2.jpg" },
+                    ]
+                  })}
+                />
+
+                <PollCard
+                  poll={Immutable.fromJS({
+                    title: "Winter is coming",
+                    author: "bash",
+                    date: Date.now(),
+                    rewards: [
+                      { image: "/img/products/jackets/1.jpg" },
+                      { image: "/img/products/jackets/2.jpg" },
+                      { image: "/img/products/jackets/3.jpg" },
+                    ]
+                  })}
+                />
+              </CardGridHalfCell>
             </CardGridColumn>
 
             <CardGridColumn width={2}>
@@ -192,7 +228,7 @@ class HomeView extends React.Component {
           </CardGrid>
 
           <div className="pv-cb-load">
-            <button>Load More</button>
+            <button disabled={true}>Load More</button>
           </div>
         </section>
       </div>

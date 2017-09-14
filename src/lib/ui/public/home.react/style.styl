@@ -45,6 +45,7 @@
   .pv-cb-load
     width 100%
     text-align center
+    margin-top 10px
 
     button
       background transparent
@@ -62,3 +63,9 @@
 
       display inline-block
       vertical-align middle
+
+      &:not([disabled]):hover
+        text-decoration underline
+
+      &:[disabled]
+        opacity 0.5
